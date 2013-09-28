@@ -26,4 +26,4 @@ Step 7. Run 'php artisan migrate' on project root for db migration
 
 1. Template was done using Bootstrap v3.0.0
 
-2. Form validation was done using this library http://rickharrison.github.io/validate.js/
+2. Form validation was done using validate.js library http://rickharrison.github.io/validate.js/
