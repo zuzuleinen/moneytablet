@@ -17,9 +17,12 @@ class DashboardController extends BaseController
 
         if ($userTablet) {
             $predictions = $userTablet->predictions;
-            return View::make(
-                    'dashboard/index', array('tablet' => $userTablet, 'predictions' => $predictions)
-            );
+            
+            return View::make('dashboard/index', array('tablet' => $userTablet, 'predictions' => $predictions))
+                ->nest('predictionModal', 'dashboard.modal.prediction')
+                ->nest('expenseModal', 'dashboard.modal.expense', array('predictions' => $predictions))
+                ->nest('incomeModal', 'dashboard.modal.income')
+                ->nest('economyModal', 'dashboard.modal.economy');
         }
         return View::make('dashboard/info');
     }
