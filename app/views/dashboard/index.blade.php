@@ -73,7 +73,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-md-4 col-md-offset-11">
+    <div class="col-md-1 col-md-offset-10">
         <button type="button" class="btn btn-danger ">Close tablet</button>
     </div>
 </div>
