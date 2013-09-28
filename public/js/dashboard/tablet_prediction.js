@@ -4,21 +4,20 @@ if (typeof Tablet === 'undefined') {
 
 
 Tablet.Prediction = {
-    init: function(config) {
-        this.initFields(config);
-        this.bindEvents();
-    },
-    initFields: function(config) {
-        this.tabletId = config.tabletId.val();
-        this.addPredictionButton = config.addNewPredictionButton;
-        this.addPredictionModal = config.addPredictionModal;
-        this.addPredictionForm = config.addPredictionForm;
-        this.savePredictionButton = config.savePredictionButton;
-        this.predictionNameInput = this.addPredictionForm.find("input[name='name']");
-        this.predictionValueInput = this.addPredictionForm.find("input[name='value']");
-        this.tablePredictionExpense = config.tablePredictionExpense;
+    init: function(modalId, buttonId, totalsId) {
+        this.addPredictionModal = $(modalId);
+        this.addPredictionButton = $(buttonId);
+        this.totalsTable = $(totalsId);
+        this.tablePredictionExpense = $('#table-prediction-expense');
+        this.tabletIdInput = $('input[name="tablet_id"]');
+
+        this.savePredictionButton = this.addPredictionModal.find('#prediction-save');
+        this.predictionNameInput = this.addPredictionModal.find("input[name='name']");
+        this.predictionValueInput = this.addPredictionModal.find("input[name='value']");
+        
         this.balanceValueSpan = $('#balance-value');
 
+        this.bindEvents();
     },
     bindEvents: function() {
         this.addPredictionButton.on('click', this, this.showPredictionModal);
@@ -33,6 +32,8 @@ Tablet.Prediction = {
     },
     savePrediction: function(event) {
         var self = event.data;
+        var tabletId = self.tabletIdInput.val();
+
         var predictionName = self.predictionNameInput.val();
         var predictionValue = self.predictionValueInput.val();
 
@@ -40,7 +41,7 @@ Tablet.Prediction = {
 
         $.post(
                 '/prediction/create',
-                {prediction: predictionName, value: predictionValue, tabletId: self.tabletId},
+                {prediction: predictionName, value: predictionValue, tabletId: tabletId},
         function(response) {
             if (response.success) {
                 self.tablePredictionExpense.show();

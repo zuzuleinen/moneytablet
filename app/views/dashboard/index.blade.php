@@ -215,15 +215,7 @@
 {{ HTML::script('js/dashboard/tablet_income.js') }}
 {{ HTML::script('js/dashboard/tablet_economy.js') }}
 <script type="text/javascript">
-    config = {};
-    config.tabletId = $("input[name='tablet_id']");
-    config.addPredictionModal = $('#add-prediction-modal');
-    config.addNewPredictionButton = $('#add-new-prediction');
-    config.addPredictionForm = $('#add-prediction-form');
-    config.savePredictionButton = $('#prediction-save');
-    config.tablePredictionExpense = $('#table-prediction-expense');
-    Tablet.Prediction.init(config);
-
+    Tablet.Prediction.init('#add-prediction-modal', '#add-new-prediction', '#tablet-totals');
     Tablet.Expense.init('#add-expense-modal', '#add-new-expense-button', '#tablet-totals');
     Tablet.Income.init('#add-income-modal', '#add-new-income', '#tablet-totals');
     Tablet.Economy.init('#add-economy-modal', '#add-new-economy', '#tablet-totals');
