@@ -14,7 +14,7 @@ Tablet.Economy = {
 
         this.currentSumTd = this.totalsTable.find('#current-sum');
         this.economiesTd = this.totalsTable.find('#tablet-economies');
-        
+
         this.balanceValueSpan = $('#balance-value');
 
         this.bindEvents();
@@ -22,6 +22,8 @@ Tablet.Economy = {
     bindEvents: function() {
         this.addEconomyButton.on('click', this, this.showEconomyModal);
         this.saveEconomyButton.on('click', this, this.saveEconomy);
+        this.addEconomyModal.on('hidden.bs.modal', this, this.clearModal);
+        this.economyValueInput.on('change', this, this.removeInputError);
     },
     showEconomyModal: function(event) {
         var self = event.data;
@@ -38,7 +40,7 @@ Tablet.Economy = {
 
         var initialCurrentSumValue = self.currentSumTd.text();
         var initialEconomiesValue = self.economiesTd.text();
-        
+
         var initialBalanceValue = self.balanceValueSpan.text();
 
         $.post('/economy/create',
@@ -46,22 +48,41 @@ Tablet.Economy = {
         function(response) {
             if (response.success) {
                 self.hideEconomyModal();
-                
+
                 var newCurrentSumValue = parseFloat(initialCurrentSumValue) - parseFloat(economyValue);
                 self.currentSumTd.text(newCurrentSumValue.toFixed(2));
-                
+
                 var newEconomiesValue = parseFloat(initialEconomiesValue) + parseFloat(economyValue);
                 self.economiesTd.text(newEconomiesValue.toFixed(2));
-                
+
                 var newBalanceValue = parseFloat(initialBalanceValue) - parseFloat(economyValue);
                 self.balanceValueSpan.text(newBalanceValue.toFixed(2));
 
             } else {
-                //
+                if (response.economyValueMsg) {
+                    self.economyValueInput.closest('.form-group').addClass('has-error');
+                    self.economyValueInput.parent().next('.help-block').text(response.economyValueMsg);
+                }
+
+                if (response.tabletMsg) {
+                    self.economyValueInput.closest('.form-group').addClass('has-error');
+                    self.economyValueInput.parent().next('.help-block').text(response.tabletMsg);
+                }
             }
         },
                 'json'
                 );
 
+    },
+    removeInputError: function(event) {
+        var element = jQuery(this);
+        element.parent().next('.help-block').text('');
+        element.parents('.form-group').removeClass('has-error');
+    },
+    clearModal: function(event) {
+        var self = event.data;
+        self.economyValueInput.val('');
+        self.economyValueInput.parent().next('.help-block').text('');
+        self.economyValueInput.parents('.form-group').removeClass('has-error');
     }
 };
