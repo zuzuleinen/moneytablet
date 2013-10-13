@@ -22,6 +22,8 @@ Tablet.Income = {
     bindEvents: function() {
         this.addIncomeButton.on('click', this, this.showIncomeModal);
         this.saveIncomeButton.on('click', this, this.saveIncome);
+        this.addIncomeModal.on('hidden.bs.modal', this, this.clearModal);
+        this.incomeValueInput.on('change', this, this.removeInputError);
     },
     showIncomeModal: function(event) {
         var self = event.data;
@@ -48,19 +50,39 @@ Tablet.Income = {
 
                 var newTotalAmountValue = parseFloat(initialTotalAmountValue) + parseFloat(incomeValue);
                 self.totalAmountTd.text(newTotalAmountValue.toFixed(2));
-                
+
                 var newCurrentSumValue = parseFloat(initialCurrentSumValue) + parseFloat(incomeValue);
                 self.currentSumTd.text(newCurrentSumValue.toFixed(2));
-                
+
                 var newBalanceValue = parseFloat(initialBalanceValue) + parseFloat(incomeValue);
                 self.balanceValueSpan.text(newBalanceValue.toFixed(2));
-                
+
             } else {
-                //
+                if (response.incomeValueMsg) {
+                    self.incomeValueInput.closest('.form-group').addClass('has-error');
+                    self.incomeValueInput.parent().next('.help-block').text(response.incomeValueMsg);
+                }
+
+                if (response.tabletMsg) {
+                    self.incomeValueInput.closest('.form-group').addClass('has-error');
+                    self.incomeValueInput.parent().next('.help-block').text(response.tabletMsg);
+                }
+
             }
         },
                 'json'
                 );
 
+    },
+    removeInputError: function(event) {
+        var element = jQuery(this);
+        element.parent().next('.help-block').text('');
+        element.parents('.form-group').removeClass('has-error');
+    },
+    clearModal: function(event) {
+        var self = event.data;
+        self.incomeValueInput.val('');
+        self.incomeValueInput.parent().next('.help-block').text('');
+        self.incomeValueInput.parents('.form-group').removeClass('has-error');
     }
 };
