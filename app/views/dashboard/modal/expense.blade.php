@@ -11,6 +11,7 @@
                         <label class="col-lg-2 control-label" for="prediction_id">Category</label>
                         <div class="col-lg-5">
                             <select name="prediction_id" class="form-control">
+                                <option value="0">Select a category</option>
                                 @foreach ($predictions as $prediction)
                                 <option value="{{ $prediction->id }}">{{ $prediction->name }}</option>
                                 @endforeach
