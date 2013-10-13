@@ -4,7 +4,7 @@
 <div class="row">
     <div class="col-md-4">
         <button id="add-new-prediction" type="button" class="btn btn-default btn-xs">Add prediction</button>
-        <button id="add-new-expense-button" type="button" class="btn btn-default btn-xs">Add expense</button>
+        <button id="add-new-expense-button" type="button" class="btn btn-default btn-xs" <?php echo ($predictions->count() ? '' : 'style="display: none"') ?>>Add expense</button>
     </div>
     <div class="col-md-6 col-md-offset-2">
         <button id="add-new-income" type="button" class="btn btn-default btn-xs">Add income</button>

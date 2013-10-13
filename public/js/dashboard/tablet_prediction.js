@@ -7,6 +7,7 @@ Tablet.Prediction = {
     init: function(modalId, buttonId, totalsId) {
         this.addPredictionModal = $(modalId);
         this.addPredictionButton = $(buttonId);
+        this.addExpenseButton = $('#add-new-expense-button');
         this.totalsTable = $(totalsId);
         this.tablePredictionExpense = $('#table-prediction-expense');
         this.tabletIdInput = $('input[name="tablet_id"]');
@@ -44,6 +45,7 @@ Tablet.Prediction = {
                 {prediction: predictionName, value: predictionValue, tabletId: tabletId},
         function(response) {
             if (response.success) {
+                self.addExpenseButton.show();
                 self.tablePredictionExpense.show();
                 self.addPredictionModal.modal('hide');
                 var lineHtml = '<tr><td><input class="form-control prediction-id-checkbox" type="checkbox" value="'
