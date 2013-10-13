@@ -25,7 +25,7 @@ class TabletController extends BaseController
     {
         $postData = Input::all();
 
-        //@TODO I should make the tablet unique for user
+        //@TODO I should make the tablet name unique for user
         $rules = array(
             'name' => array('required'),
             'amount' => array('required', 'numeric'),
