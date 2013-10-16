@@ -74,7 +74,7 @@
 </div>
 <div class="row">
     <div class="col-md-1 col-md-offset-10">
-        <button type="button" class="btn btn-danger ">Close tablet</button>
+        <button type="button" class="btn btn-danger" id="close-tablet-button">Close tablet</button>
     </div>
 </div>
 
@@ -82,17 +82,20 @@
 {{ $expenseModal }}
 {{ $incomeModal }}
 {{ $economyModal }}
+{{ $closeTabletModal }}
 
 @stop
 
 @section('footer-js-scripts')
 @parent
 {{ HTML::script('js/validate.min.js') }}
+{{ HTML::script('js/dashboard/tablet.js') }}
 {{ HTML::script('js/dashboard/tablet_prediction.js') }}
 {{ HTML::script('js/dashboard/tablet_expense.js') }}
 {{ HTML::script('js/dashboard/tablet_income.js') }}
 {{ HTML::script('js/dashboard/tablet_economy.js') }}
 <script type="text/javascript">
+    Tablet.init('#close-tablet-modal', '#close-tablet-button');
     Tablet.Prediction.init('#add-prediction-modal', '#add-new-prediction', '#tablet-totals');
     Tablet.Expense.init('#add-expense-modal', '#add-new-expense-button', '#tablet-totals');
     Tablet.Income.init('#add-income-modal', '#add-new-income', '#tablet-totals');

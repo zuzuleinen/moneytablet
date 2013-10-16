@@ -22,7 +22,8 @@ class DashboardController extends BaseController
                 ->nest('predictionModal', 'dashboard.modal.prediction')
                 ->nest('expenseModal', 'dashboard.modal.expense', array('predictions' => $predictions))
                 ->nest('incomeModal', 'dashboard.modal.income')
-                ->nest('economyModal', 'dashboard.modal.economy');
+                ->nest('economyModal', 'dashboard.modal.economy')
+                ->nest('closeTabletModal', 'dashboard.modal.closetablet');
         }
         return View::make('dashboard/info');
     }
