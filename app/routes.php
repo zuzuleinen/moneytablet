@@ -16,6 +16,7 @@ Route::get('dashboard', array('before' => 'auth', 'uses' => 'DashboardController
 
 Route::get('tablet/create', array('before' => 'auth', 'uses' => 'TabletController@create'));
 Route::post('tablet/createPost', array('before' => 'auth', 'uses' => 'TabletController@createPost'));
+Route::post('tablet/close', array('before' => 'auth', 'uses' => 'TabletController@close'));
 
 Route::post('prediction/create', array('before' => 'auth', 'uses' => 'PredictionController@create'));
 

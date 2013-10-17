@@ -5,8 +5,7 @@
  * 
  * @author Andrei Boar <andrei.boar@gmail.com>
  */
-class TabletController extends BaseController
-{
+class TabletController extends BaseController {
 
     /**
      * Tablet create action
@@ -17,7 +16,7 @@ class TabletController extends BaseController
         $suggestedName = date('F Y');
 
         return View::make(
-                'tablet/create', array('tabletName' => $suggestedName)
+                        'tablet/create', array('tabletName' => $suggestedName)
         );
     }
 
@@ -43,8 +42,8 @@ class TabletController extends BaseController
 
         if ($validator->fails()) {
             return Redirect::to('tablet/create')
-                    ->withErrors($validator)
-                    ->with('amount', $postData['amount']);
+                            ->withErrors($validator)
+                            ->with('amount', $postData['amount']);
         }
 
         $tablet = new Tablet();
@@ -57,6 +56,26 @@ class TabletController extends BaseController
         $tablet->save();
 
         return Redirect::to('dashboard');
+    }
+    
+    /**
+     * Close tablet action
+     * @return string
+     */
+    public function close()
+    {
+        $response = array('success' => false);
+        
+        $tabletId = Input::get('tabletId');
+
+        if ($tabletId) {
+            $tablet = Tablet::find($tabletId);
+            $tablet->is_active = 0;
+            $tablet->save();
+            $response['success'] = true;
+        }
+
+        return Response::json($response);
     }
 
 }
