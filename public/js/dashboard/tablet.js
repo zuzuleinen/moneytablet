@@ -27,6 +27,7 @@ Tablet = {
         function(response) {
             if (response.success) {
                 self.hideCloseModal();
+                window.location.replace("/tablet/closeSuccess");
             }
         },
                 'json'

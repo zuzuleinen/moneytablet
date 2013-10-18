@@ -74,6 +74,7 @@ class TabletController extends BaseController
             $tablet->is_active = 0;
             $tablet->save();
             $response['success'] = true;
+            Session::put('closedTabletId', $tablet->id);
         }
 
         return Response::json($response);
@@ -85,7 +86,13 @@ class TabletController extends BaseController
      */
     public function closeSuccess()
     {
-        return View::make('tablet/close_success');
-    }
+        if (Session::has('closedTabletId')) {
+            $closedTabletId = Session::get('closedTabletId');
+            $tablet = Tablet::find($closedTabletId);
 
+            return View::make('tablet/close_success', array('tablet' => $tablet));
+        }
+
+        return Redirect::to('dashboard');
+    }
 }
