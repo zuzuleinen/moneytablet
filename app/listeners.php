@@ -50,3 +50,18 @@ Event::listen('expense.create.success', function($expense) {
             }
         }
 );
+
+/**
+ * Update current_sum on Tablet upon income.create.success
+ */
+Event::listen('income.create.success', function($incomeValue, $tabletId) {
+            $tablet = Tablet::find($tabletId);
+
+            if ($tablet->id) {
+                $oldCurrentSum = $tablet->current_sum;
+                $newCurrentSum = $oldCurrentSum + $incomeValue;
+                $tablet->current_sum = $newCurrentSum;
+                $tablet->save();
+            }
+        }
+);
