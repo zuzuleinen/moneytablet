@@ -34,7 +34,9 @@ class Tablet extends Eloquent
     public function getBalance()
     {
         $currentSum = (float) $this->current_sum;
-        $predictionsSum = (float) $this->predictions()->sum('value');
+        $predictionsSum = (float) $this->predictions()
+                ->where('value', '>', 0)
+                ->sum('value');
         
         return $currentSum - $predictionsSum;
     }

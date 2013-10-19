@@ -80,7 +80,17 @@ Tablet.Expense = {
                 var newCurrentSumValue = parseFloat(totalAmountValue) - parseFloat(newTotalExpensesValue);
                 self.currentSumTd.text(newCurrentSumValue.toFixed(2));
 
-                var newBalanceValue = parseFloat(initialBalanceValue) - parseFloat(expenseValue);
+                var predictions = $('.prediction-value');
+                var predictionsSum = 0;
+                
+                $.each(predictions, function(key, value) {
+                    predictionVal = parseFloat($(value).text());
+                    if (predictionVal > 0) {
+                        predictionsSum = predictionsSum + predictionVal;
+                    }
+                });
+                
+                var newBalanceValue = parseFloat(newCurrentSumValue) - parseFloat(predictionsSum);
                 self.balanceValueSpan.text(newBalanceValue.toFixed(2));
 
             } else {
