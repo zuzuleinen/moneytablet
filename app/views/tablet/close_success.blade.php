@@ -8,4 +8,5 @@
     <li><strong>Money left:</strong> {{ floatval($tablet->current_sum) }}</li>
     <li><strong>Total economies:</strong> {{ floatval($tablet->economies) }}</li>
 </ul>
+<p>If you want, you can <a href="{{  URL::to('tablet/create') }}">create a new tablet</a>.</p>
 @stop
