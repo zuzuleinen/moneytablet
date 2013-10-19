@@ -11,6 +11,7 @@ Tablet.Expense = {
         this.totalAmountTd = this.totalsTable.find('#total-amount');
         this.totalExpensesTd = this.totalsTable.find('#total-expenses');
         this.currentSumTd = this.totalsTable.find('#current-sum');
+        this.economiesTd = this.totalsTable.find('#tablet-economies');
 
         this.balanceValueSpan = $('#balance-value');
 
@@ -53,6 +54,8 @@ Tablet.Expense = {
         var initialTotalExpensesValue = self.totalExpensesTd.text();
 
         var totalAmountValue = self.totalAmountTd.text();
+        
+        var totalEconomiesValue = self.economiesTd.text();
 
         var initialBalanceValue = self.balanceValueSpan.text();
 
@@ -77,7 +80,7 @@ Tablet.Expense = {
                 var newTotalExpensesValue = parseFloat(initialTotalExpensesValue) + parseFloat(expenseValue);
                 self.totalExpensesTd.text(newTotalExpensesValue.toFixed(2));
 
-                var newCurrentSumValue = parseFloat(totalAmountValue) - parseFloat(newTotalExpensesValue);
+                var newCurrentSumValue = parseFloat(totalAmountValue) - parseFloat(newTotalExpensesValue) - parseFloat(totalEconomiesValue);
                 self.currentSumTd.text(newCurrentSumValue.toFixed(2));
 
                 var predictions = $('.prediction-value');
