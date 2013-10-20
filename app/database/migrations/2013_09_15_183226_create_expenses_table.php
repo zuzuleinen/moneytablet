@@ -15,7 +15,7 @@ class CreateExpensesTable extends Migration
         Schema::create('expenses', function($table) {
                 $table->increments('id');
                 $table->integer('prediction_id')->unsigned();
-                $table->foreign('prediction_id')->references('id')->on('predictions');
+                $table->foreign('prediction_id')->references('id')->on('predictions')->onDelete('cascade');
                 $table->decimal('value', 10, 2)->default(0);
                 $table->timestamps();
             });
