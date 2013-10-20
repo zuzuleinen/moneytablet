@@ -31,6 +31,7 @@ Tablet.Prediction = {
         this.predictionValueInput.on('change', this, this.removeInputError);
         this.addPredictionModal.on('hidden.bs.modal', this, this.clearModal);
         this.selectAllPredictionsCheckbox.on('change', this, this.toogleSelectAllPredictions);
+        this.singlePredictionCheckbox.on('change', this, this.afterSinglePredictionClick);
     },
     toogleSelectAllPredictions: function(event) {
         var self = event.data;
@@ -45,6 +46,27 @@ Tablet.Prediction = {
                 $(value).prop('checked', false);
             });
             self.deletePredictionsButton.hide();
+        }
+    },
+    afterSinglePredictionClick: function(event) {
+        var self = event.data;
+        var currentElementValue = $(this).val();
+        var otherPredictionsAreChecked = false;
+        
+        self.singlePredictionCheckbox.each(function(key, value) {
+            element = $(value);
+            if (element.is(':checked') && (currentElementValue !== element.val())) {
+                otherPredictionsAreChecked = true;
+            }
+        });
+
+        if (this.checked) {
+            self.deletePredictionsButton.show();
+        } else {
+            if (!otherPredictionsAreChecked) {
+                self.selectAllPredictionsCheckbox.prop('checked', false);
+                self.deletePredictionsButton.hide();
+            }
         }
     },
     showPredictionModal: function(event) {
