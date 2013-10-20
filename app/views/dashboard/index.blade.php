@@ -13,7 +13,7 @@
     </div>
 </div>
 <div class="row">
-    <input type="hidden" name="tablet_id" value="{{ $tablet->id }}">
+    <input type="hidden" name="tablet_id" value="{{ $tablet->id }}" />
     <div class="col-md-4">
         <table class="table table-hover table-condensed" id="table-prediction-expense" <?php echo ($predictions->count() ? '' : 'style="display: none"') ?>>
             <thead>
