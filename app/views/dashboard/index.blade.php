@@ -5,6 +5,7 @@
     <div class="col-md-4">
         <button id="add-new-prediction" type="button" class="btn btn-default btn-xs">Add prediction</button>
         <button id="add-new-expense-button" type="button" class="btn btn-default btn-xs" <?php echo ($predictions->count() ? '' : 'style="display: none"') ?>>Add expense</button>
+        <button id="delete-predictions" type="button" class="btn btn-default btn-xs" style="display: none;">Delete</button>
     </div>
     <div class="col-md-6 col-md-offset-2">
         <button id="add-new-income" type="button" class="btn btn-default btn-xs">Add income</button>
@@ -17,7 +18,7 @@
         <table class="table table-hover table-condensed" id="table-prediction-expense" <?php echo ($predictions->count() ? '' : 'style="display: none"') ?>>
             <thead>
                 <tr>
-                    <th>#</th>
+                    <th><input class="form-control" id="prediction-all-checkbox" type="checkbox" value=""></th>
                     <th>Category</th>
                     <th>Prediction</th>
                     <th>Expense</th>

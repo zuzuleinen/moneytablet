@@ -8,6 +8,7 @@ Tablet.Prediction = {
         this.addPredictionModal = $(modalId);
         this.addPredictionButton = $(buttonId);
         this.addExpenseButton = $('#add-new-expense-button');
+        this.deletePredictionsButton = $('#delete-predictions');
         this.totalsTable = $(totalsId);
         this.tablePredictionExpense = $('#table-prediction-expense');
         this.tabletIdInput = $('input[name="tablet_id"]');
@@ -15,8 +16,11 @@ Tablet.Prediction = {
         this.savePredictionButton = this.addPredictionModal.find('#prediction-save');
         this.predictionNameInput = this.addPredictionModal.find("input[name='name']");
         this.predictionValueInput = this.addPredictionModal.find("input[name='value']");
-        
+
         this.balanceValueSpan = $('#balance-value');
+
+        this.selectAllPredictionsCheckbox = $('#prediction-all-checkbox');
+        this.singlePredictionCheckbox = $('.prediction-id-checkbox');
 
         this.bindEvents();
     },
@@ -26,6 +30,22 @@ Tablet.Prediction = {
         this.predictionNameInput.on('change', this, this.removeInputError);
         this.predictionValueInput.on('change', this, this.removeInputError);
         this.addPredictionModal.on('hidden.bs.modal', this, this.clearModal);
+        this.selectAllPredictionsCheckbox.on('change', this, this.toogleSelectAllPredictions);
+    },
+    toogleSelectAllPredictions: function(event) {
+        var self = event.data;
+
+        if (this.checked) {
+            self.singlePredictionCheckbox.each(function(key, value) {
+                $(value).prop('checked', true);
+            });
+            self.deletePredictionsButton.show();
+        } else {
+            self.singlePredictionCheckbox.each(function(key, value) {
+                $(value).prop('checked', false);
+            });
+            self.deletePredictionsButton.hide();
+        }
     },
     showPredictionModal: function(event) {
         var self = event.data;
