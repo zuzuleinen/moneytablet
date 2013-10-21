@@ -1,11 +1,12 @@
 <?php
+
 /**
  * Prediction controller
  * 
  * @author Andrei Boar <andrey.boar@gmail.com>
  */
-class PredictionController extends BaseController
-{
+class PredictionController extends BaseController {
+
     /**
      * Create prediction action
      * @return string
@@ -51,12 +52,41 @@ class PredictionController extends BaseController
             $prediction->value = $predictionValue;
 
             $prediction->save();
-            
+
             $response['predictionId'] = $prediction->id;
             $response['success'] = true;
         }
 
         return Response::json($response);
+    }
+
+    public function delete()
+    {
+        $response = array('success' => false);
+
+        if (Request::ajax()) {
+            $predictionIds = Input::get('predictionIds');
+            if ($predictionIds) {
+                $predictionIdsArray = $this->_getPredictionIdsArray($predictionIds);
+                Prediction::destroy($predictionIdsArray);
+                $response['success'] = true;
+            }
+        }
+
+        return Response::json($response);
+    }
+    
+    /**
+     * Get array of prediction ids from request string
+     * @param string $predictionIds ex. '9.8.7.'
+     * @return array
+     */
+    private function _getPredictionIdsArray($predictionIds)
+    {
+        $predictionIdsArr = explode('.', $predictionIds);
+        array_pop($predictionIdsArr);
+        
+        return $predictionIdsArr;
     }
 
 }

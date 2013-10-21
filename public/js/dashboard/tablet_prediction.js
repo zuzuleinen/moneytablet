@@ -32,6 +32,29 @@ Tablet.Prediction = {
         this.addPredictionModal.on('hidden.bs.modal', this, this.clearModal);
         this.selectAllPredictionsCheckbox.on('change', this, this.toogleSelectAllPredictions);
         this.singlePredictionCheckbox.on('change', this, this.afterSinglePredictionClick);
+        this.deletePredictionsButton.on('click', this, this.deletePredictions);
+    },
+    deletePredictions: function(event) {
+        var checkedPredictions = $('.prediction-id-checkbox:checked');
+        var predictionIds = '';
+
+        //we add the . as a separator for prediction ids
+        checkedPredictions.each(function(key, value) {
+            element = $(value);
+            predictionIds = predictionIds + element.val() + '.';
+        });
+
+        $.post(
+                '/prediction/delete',
+                {predictionIds: predictionIds},
+        function(response) {
+            if (response.success) {
+                checkedPredictions.parents('tr').hide(500);
+            }
+        },
+                'json'
+                );
+
     },
     toogleSelectAllPredictions: function(event) {
         var self = event.data;
@@ -52,7 +75,7 @@ Tablet.Prediction = {
         var self = event.data;
         var currentElementValue = $(this).val();
         var otherPredictionsAreChecked = false;
-        
+
         self.singlePredictionCheckbox.each(function(key, value) {
             element = $(value);
             if (element.is(':checked') && (currentElementValue !== element.val())) {

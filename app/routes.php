@@ -20,6 +20,7 @@ Route::post('tablet/close', array('before' => 'auth', 'uses' => 'TabletControlle
 Route::get('tablet/closeSuccess', array('before' => 'auth', 'uses' => 'TabletController@closeSuccess'));
 
 Route::post('prediction/create', array('before' => 'auth', 'uses' => 'PredictionController@create'));
+Route::post('prediction/delete', array('before' => 'auth', 'uses' => 'PredictionController@delete'));
 
 Route::post('expense/create', array('before' => 'auth', 'uses' => 'ExpenseController@create'));
 
