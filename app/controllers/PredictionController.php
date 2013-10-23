@@ -59,15 +59,35 @@ class PredictionController extends BaseController {
 
         return Response::json($response);
     }
-
+    
+    /**
+     * Delete prediction action
+     * @return string
+     */
     public function delete()
     {
         $response = array('success' => false);
 
         if (Request::ajax()) {
             $predictionIds = Input::get('predictionIds');
+            $tabletId = null;
+
             if ($predictionIds) {
                 $predictionIdsArray = $this->_getPredictionIdsArray($predictionIds);
+                foreach ($predictionIdsArray as $predictionId) {
+                    $prediction = Prediction::find($predictionId);
+                    if (!$tabletId) {
+                        $tablet = Tablet::find($prediction->tablet_id);
+                    }
+
+                    $predictionExpenses = $prediction->expenses;
+                    foreach ($predictionExpenses as $expense) {
+                        $tablet->total_expenses = $tablet->total_expenses - $expense->value;
+                        $tablet->current_sum = $tablet->current_sum + $expense->value;
+                    }
+                    $tablet->save();
+                }
+
                 Prediction::destroy($predictionIdsArray);
                 $response['success'] = true;
             }
@@ -75,7 +95,7 @@ class PredictionController extends BaseController {
 
         return Response::json($response);
     }
-    
+
     /**
      * Get array of prediction ids from request string
      * @param string $predictionIds ex. '9.8.7.'
@@ -85,7 +105,7 @@ class PredictionController extends BaseController {
     {
         $predictionIdsArr = explode('.', $predictionIds);
         array_pop($predictionIdsArr);
-        
+
         return $predictionIdsArr;
     }
 
