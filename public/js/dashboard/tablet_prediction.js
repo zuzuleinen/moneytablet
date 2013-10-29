@@ -129,6 +129,7 @@ Tablet.Prediction = {
 
                 var newBalanceValue = parseFloat(initialBalanceValue) - parseFloat(predictionValue);
                 self.balanceValueSpan.text(newBalanceValue.toFixed(2));
+                self.singlePredictionCheckbox = $('.prediction-id-checkbox');
             } else {
                 if (response.predictionMsg) {
                     self.predictionNameInput.closest('.form-group').addClass('has-error');
