@@ -17,6 +17,8 @@ Tablet.Prediction = {
         this.predictionNameInput = this.addPredictionModal.find("input[name='name']");
         this.predictionValueInput = this.addPredictionModal.find("input[name='value']");
 
+        this.totalExpensesTd = this.totalsTable.find('#total-expenses');
+        this.currentSumTd = this.totalsTable.find('#current-sum');
         this.balanceValueSpan = $('#balance-value');
 
         this.selectAllPredictionsCheckbox = $('#prediction-all-checkbox');
@@ -35,12 +37,26 @@ Tablet.Prediction = {
         this.deletePredictionsButton.on('click', this, this.deletePredictions);
     },
     deletePredictions: function(event) {
+        var self = event.data;
         var checkedPredictions = $('.prediction-id-checkbox:checked');
         var predictionIds = '';
+        
+        var initialTotalExpenses = self.totalExpensesTd.text();
+        var initialCurrentMoney = self.currentSumTd.text();
+        var initialBalanceValue = self.balanceValueSpan.text();
+        
+        var checkedExpensesSum = 0;
+        var checkedPredictionsSum = 0;
 
         //we add the . as a separator for prediction ids
         checkedPredictions.each(function(key, value) {
             element = $(value);
+            predictionValue = element.parent().siblings('.prediction-value').text();
+            expenseValue = element.parent().siblings('.expense-value').text();
+            
+            checkedExpensesSum = checkedExpensesSum + parseFloat(expenseValue);
+            checkedPredictionsSum = checkedPredictionsSum + parseFloat(predictionValue);
+            
             predictionIds = predictionIds + element.val() + '.';
         });
 
@@ -50,6 +66,15 @@ Tablet.Prediction = {
         function(response) {
             if (response.success) {
                 checkedPredictions.parents('tr').hide(500);
+                
+                //update new totals values
+                var newTotalExpensesValue = parseFloat(initialTotalExpenses) - checkedExpensesSum;
+                var newCurrentMoneyValue = parseFloat(initialCurrentMoney) + checkedExpensesSum;
+                var newBalanceValue = parseFloat(initialBalanceValue) + checkedPredictionsSum + checkedExpensesSum;
+                
+                self.totalExpensesTd.text(newTotalExpensesValue.toFixed(2));
+                self.currentSumTd.text(newCurrentMoneyValue.toFixed(2));
+                self.balanceValueSpan.text(newBalanceValue.toFixed(2));
             }
         },
                 'json'
