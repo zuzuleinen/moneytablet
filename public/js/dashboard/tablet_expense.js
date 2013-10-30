@@ -80,7 +80,7 @@ Tablet.Expense = {
                 var newTotalExpensesValue = parseFloat(initialTotalExpensesValue) + parseFloat(expenseValue);
                 self.totalExpensesTd.text(newTotalExpensesValue.toFixed(2));
 
-                var newCurrentSumValue = parseFloat(totalAmountValue) - parseFloat(newTotalExpensesValue) - parseFloat(totalEconomiesValue);
+                var newCurrentSumValue = parseFloat(totalAmountValue) - parseFloat(newTotalExpensesValue);
                 self.currentSumTd.text(newCurrentSumValue.toFixed(2));
 
                 var predictions = $('.prediction-value');
