@@ -9,7 +9,6 @@
     border-top: 0px;
 }
 
-/*make something better bellow*/ 
 .action-button-cancel {
     color: #D9534F;
 }
@@ -18,6 +17,18 @@
     color: #D9534F;
 }
 
+.action-button-cancel:visited {
+    color: #D9534F;
+}
+
 .action-button-save {
+    color: #009933;
+}
+
+.action-button-save:hover {
+    color: #009933;
+}
+
+.action-button-save:visited {
     color: #009933;
 }
