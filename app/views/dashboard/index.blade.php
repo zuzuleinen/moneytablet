@@ -15,7 +15,7 @@
 <div class="row">
     <input type="hidden" name="tablet_id" value="{{ $tablet->id }}" />
     <div class="col-md-4">
-        <table class="table table-hover table-condensed" id="table-prediction-expense" <?php echo ($predictions->count() ? '' : 'style="display: none"') ?>>
+        <table class="table table-condensed" id="table-prediction-expense" <?php echo ($predictions->count() ? '' : 'style="display: none"') ?>>
             <thead>
                 <tr>
                     <th><input class="form-control" id="prediction-all-checkbox" type="checkbox" value=""></th>
@@ -32,18 +32,18 @@
                     <td class="prediction-value">{{ floatval($prediction->value) }}</td>
                     <td class="expense-value">{{ floatval($prediction->getTotalExpenses()) }}</td>
                 </tr>
-                @endforeach
-                <!--
-                <tr>
-                    <td>Fun</td>
-                    <td>50</td>
-                    <td><span class="text-muted">0</span></td>
-                </tr><!--
-                <tr>
-                    <td>Car</td>
-                    <td>100</td>
-                    <td><input class="form-control" type="text"></td>
-                </tr>-->
+            @endforeach
+            <!--
+            <tr>
+                <td>Fun</td>
+                <td>50</td>
+                <td><span class="text-muted">0</span></td>
+            </tr><!--
+            <tr>
+                <td>Car</td>
+                <td>100</td>
+                <td><input class="form-control" type="text"></td>
+            </tr>-->
             </tbody>
         </table>
     </div>

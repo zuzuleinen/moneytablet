@@ -1,5 +1,23 @@
 .table .form-control {
     height:21px;
+    width: 70px;
     line-height: 21px;
     padding: 0 5px;
+}
+
+.table .action-button {
+    border-top: 0px;
+}
+
+/*make something better bellow*/ 
+.action-button-cancel {
+    color: #D9534F;
+}
+
+.action-button-cancel:hover {
+    color: #D9534F;
+}
+
+.action-button-save {
+    color: #009933;
 }

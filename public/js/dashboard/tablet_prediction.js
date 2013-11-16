@@ -4,6 +4,7 @@ if (typeof Tablet === 'undefined') {
 
 
 Tablet.Prediction = {
+    flagCell: false,
     init: function(modalId, buttonId, totalsId) {
         this.addPredictionModal = $(modalId);
         this.addPredictionButton = $(buttonId);
@@ -24,6 +25,8 @@ Tablet.Prediction = {
         this.selectAllPredictionsCheckbox = $('#prediction-all-checkbox');
         this.singlePredictionCheckbox = $('.prediction-id-checkbox');
 
+        this.cellPredictionValue = this.tablePredictionExpense.find('.prediction-value');
+
         this.bindEvents();
     },
     bindEvents: function() {
@@ -35,16 +38,42 @@ Tablet.Prediction = {
         this.selectAllPredictionsCheckbox.on('change', this, this.toogleSelectAllPredictions);
         this.singlePredictionCheckbox.on('change', this, this.afterSinglePredictionClick);
         this.deletePredictionsButton.on('click', this, this.deletePredictions);
+        this.cellPredictionValue.on('click', this, this.makeEditable);
+    },
+    makeEditable: function(event) {
+        var self = event.data;
+
+        if (self.flagCell === false) {
+            var td = $(this);
+            var predictionValue = td.text();
+            var row = td.parent();
+            td.replaceWith('<td class="prediction-value">'
+                    + '<input class="form-control" type="text" value="' + predictionValue + '">'
+                    + '</td>');
+            self.showActionButtons(row);
+        }
+        self.flagCell = true;
+    },
+    showActionButtons: function(row) {
+        row.append('<td><a class="action-button-save" href="#"><span class="glyphicon glyphicon-ok"></span></a></td>');
+        row.append('<td><a class="action-button-cancel" href="#"><span class="glyphicon glyphicon-remove"></span></a></td>');
+        
+        $('.action-button-save').on('click', function() {
+            alert('save');
+        });
+        $('.action-button-cancel').on('click', function() {
+            alert('cancel');
+        });
     },
     deletePredictions: function(event) {
         var self = event.data;
         var checkedPredictions = $('.prediction-id-checkbox:checked');
         var predictionIds = '';
-        
+
         var initialTotalExpenses = self.totalExpensesTd.text();
         var initialCurrentMoney = self.currentSumTd.text();
         var initialBalanceValue = self.balanceValueSpan.text();
-        
+
         var checkedExpensesSum = 0;
         var checkedPredictionsSum = 0;
 
@@ -53,10 +82,10 @@ Tablet.Prediction = {
             element = $(value);
             predictionValue = element.parent().siblings('.prediction-value').text();
             expenseValue = element.parent().siblings('.expense-value').text();
-            
+
             checkedExpensesSum = checkedExpensesSum + parseFloat(expenseValue);
             checkedPredictionsSum = checkedPredictionsSum + parseFloat(predictionValue);
-            
+
             predictionIds = predictionIds + element.val() + '.';
         });
 
@@ -66,12 +95,12 @@ Tablet.Prediction = {
         function(response) {
             if (response.success) {
                 checkedPredictions.parents('tr').hide(500);
-                
+
                 //update new totals values
                 var newTotalExpensesValue = parseFloat(initialTotalExpenses) - checkedExpensesSum;
                 var newCurrentMoneyValue = parseFloat(initialCurrentMoney) + checkedExpensesSum;
                 var newBalanceValue = parseFloat(initialBalanceValue) + checkedPredictionsSum + checkedExpensesSum;
-                
+
                 self.totalExpensesTd.text(newTotalExpensesValue.toFixed(2));
                 self.currentSumTd.text(newCurrentMoneyValue.toFixed(2));
                 self.balanceValueSpan.text(newBalanceValue.toFixed(2));
