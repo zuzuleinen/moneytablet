@@ -9,6 +9,10 @@
     border-top: 0px;
 }
 
+.prediction-value {
+    cursor: pointer;
+}
+
 .action-button-cancel {
     color: #D9534F;
 }
