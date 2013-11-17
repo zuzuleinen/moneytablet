@@ -32,18 +32,7 @@
                     <td class="prediction-value">{{ floatval($prediction->value) }}</td>
                     <td class="expense-value">{{ floatval($prediction->getTotalExpenses()) }}</td>
                 </tr>
-            @endforeach
-            <!--
-            <tr>
-                <td>Fun</td>
-                <td>50</td>
-                <td><span class="text-muted">0</span></td>
-            </tr><!--
-            <tr>
-                <td>Car</td>
-                <td>100</td>
-                <td><input class="form-control" type="text"></td>
-            </tr>-->
+                @endforeach
             </tbody>
         </table>
     </div>
@@ -95,6 +84,7 @@
 {{ HTML::script('js/dashboard/tablet_expense.js') }}
 {{ HTML::script('js/dashboard/tablet_income.js') }}
 {{ HTML::script('js/dashboard/tablet_economy.js') }}
+{{ HTML::script('js/dashboard/tablet/edit.js') }}
 <script type="text/javascript">
     Tablet.init('#close-tablet-modal', '#close-tablet-button');
     Tablet.Prediction.init('#add-prediction-modal', '#add-new-prediction', '#tablet-totals');

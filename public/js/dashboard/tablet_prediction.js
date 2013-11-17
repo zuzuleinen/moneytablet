@@ -25,8 +25,6 @@ Tablet.Prediction = {
         this.selectAllPredictionsCheckbox = $('#prediction-all-checkbox');
         this.singlePredictionCheckbox = $('.prediction-id-checkbox');
 
-        this.cellPredictionValue = this.tablePredictionExpense.find('.prediction-value');
-
         this.bindEvents();
     },
     bindEvents: function() {
@@ -38,36 +36,6 @@ Tablet.Prediction = {
         this.selectAllPredictionsCheckbox.on('change', this, this.toogleSelectAllPredictions);
         this.singlePredictionCheckbox.on('change', this, this.afterSinglePredictionClick);
         this.deletePredictionsButton.on('click', this, this.deletePredictions);
-        this.cellPredictionValue.on('click', this, this.makeEditable);
-    },
-    makeEditable: function(event) {
-        var self = event.data;
-        if (self.flagCell === false) {
-            var td = $(this);
-            var predictionValue = td.text();
-            self.prevSelectedValue = predictionValue;
-            var row = td.parent();
-            td.html('<input class="form-control" type="text" value="' + predictionValue + '">');
-            self.showActionButtons(row, self);
-        }
-        self.flagCell = true;
-    },
-    showActionButtons: function(row, self) {
-        row.append('<td><a class="action-button-save" href="#"><span class="glyphicon glyphicon-ok"></span></a></td>');
-        row.append('<td><a class="action-button-cancel" href="#"><span class="glyphicon glyphicon-remove"></span></a></td>');
-
-        $('.action-button-save').on('click', function() {
-            alert('save');
-        });
-        $('.action-button-cancel').on('click', function() {
-            self.removeActionButtons();
-            row.find('.prediction-value').text(self.prevSelectedValue);
-        });
-    },
-    removeActionButtons: function() {
-        $('.action-button-save').parent().remove();
-        $('.action-button-cancel').parent().remove();
-        this.flagCell = false;
     },
     deletePredictions: function(event) {
         var self = event.data;
