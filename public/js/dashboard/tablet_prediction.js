@@ -42,28 +42,32 @@ Tablet.Prediction = {
     },
     makeEditable: function(event) {
         var self = event.data;
-
         if (self.flagCell === false) {
             var td = $(this);
             var predictionValue = td.text();
+            self.prevSelectedValue = predictionValue;
             var row = td.parent();
-            td.replaceWith('<td class="prediction-value">'
-                    + '<input class="form-control" type="text" value="' + predictionValue + '">'
-                    + '</td>');
-            self.showActionButtons(row);
+            td.html('<input class="form-control" type="text" value="' + predictionValue + '">');
+            self.showActionButtons(row, self);
         }
         self.flagCell = true;
     },
-    showActionButtons: function(row) {
+    showActionButtons: function(row, self) {
         row.append('<td><a class="action-button-save" href="#"><span class="glyphicon glyphicon-ok"></span></a></td>');
         row.append('<td><a class="action-button-cancel" href="#"><span class="glyphicon glyphicon-remove"></span></a></td>');
-        
+
         $('.action-button-save').on('click', function() {
             alert('save');
         });
         $('.action-button-cancel').on('click', function() {
-            alert('cancel');
+            self.removeActionButtons();
+            row.find('.prediction-value').text(self.prevSelectedValue);
         });
+    },
+    removeActionButtons: function() {
+        $('.action-button-save').parent().remove();
+        $('.action-button-cancel').parent().remove();
+        this.flagCell = false;
     },
     deletePredictions: function(event) {
         var self = event.data;
