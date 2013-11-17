@@ -1,6 +1,6 @@
 .table .form-control {
     height:21px;
-    width: 70px;
+    width: 130px;
     line-height: 21px;
     padding: 0 5px;
 }
@@ -9,11 +9,11 @@
     border-top: 0px;
 }
 
-.prediction-value:hover, .expense-value:hover {
+.prediction-value:hover, .expense-value:hover, .prediction-name:hover {
     background-color: #F5F5F5;
 }
 
-.prediction-value, .expense-value {
+.prediction-value, .expense-value, .prediction-name {
     cursor: pointer;
 }
 

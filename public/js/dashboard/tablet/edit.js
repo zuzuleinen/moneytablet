@@ -6,11 +6,13 @@ Tablet.Expense.Edit = {
     flagCell: false,
     type: null,
     init: function() {
+        this.cellCategoryName = $('.prediction-name');
         this.cellPredictionValue = $('.prediction-value');
         this.cellExpenseValue = $('.expense-value');
         this.bindEvents();
     },
     bindEvents: function() {
+        this.cellCategoryName.on('click', this, this.makeEditable);
         this.cellPredictionValue.on('click', this, this.makeEditable);
         this.cellExpenseValue.on('click', this, this.makeEditable);
     },
@@ -28,6 +30,10 @@ Tablet.Expense.Edit = {
         self.flagCell = true;
     },
     setType: function(elemObj) {
+        if (elemObj.hasClass('prediction-name')) {
+            this.type = 'category';
+        }
+
         if (elemObj.hasClass('prediction-value')) {
             this.type = 'prediction';
         }
@@ -37,8 +43,8 @@ Tablet.Expense.Edit = {
         }
     },
     showActionButtons: function(row) {
-        row.append('<td><a class="action-button-save" href="#"><span class="glyphicon glyphicon-ok"></span></a></td>');
-        row.append('<td><a class="action-button-cancel" href="#"><span class="glyphicon glyphicon-remove"></span></a></td>');
+        row.append('<td class="action-button"><a class="action-button-save" href="#"><span class="glyphicon glyphicon-ok"></span></a></td>');
+        row.append('<td class="action-button"><a class="action-button-cancel" href="#"><span class="glyphicon glyphicon-remove"></span></a></td>');
         var self = this;
         $('.action-button-save').on('click', function() {
             alert('save');
@@ -55,6 +61,9 @@ Tablet.Expense.Edit = {
         this.flagCell = false;
     },
     restorePreviousValue: function(row) {
+        if (this.isCategoryType()) {
+            row.find('.prediction-name').text(this.prevSelectedValue);
+        }
         if (this.isPredictionType()) {
             row.find('.prediction-value').text(this.prevSelectedValue);
         }
@@ -64,6 +73,12 @@ Tablet.Expense.Edit = {
     },
     isPredictionType: function() {
         if (this.getEditType() === 'prediction') {
+            return true;
+        }
+        return false;
+    },
+    isCategoryType: function() {
+        if (this.getEditType() === 'category') {
             return true;
         }
         return false;
