@@ -24,7 +24,7 @@ Tablet.Expense.Edit = {
             self.setType(td);
             self.prevSelectedValue = td.text();
             var row = td.parent();
-            td.html('<input class="form-control" type="text" value="' + self.prevSelectedValue + '">');
+            td.html('<input class="form-control edit-value" type="text" value="' + self.prevSelectedValue + '">');
             self.showActionButtons(row);
         }
         self.flagCell = true;
@@ -46,8 +46,24 @@ Tablet.Expense.Edit = {
         row.append('<td class="action-button"><a class="action-button-save" href="#"><span class="glyphicon glyphicon-ok"></span></a></td>');
         row.append('<td class="action-button"><a class="action-button-cancel" href="#"><span class="glyphicon glyphicon-remove"></span></a></td>');
         var self = this;
+
         $('.action-button-save').on('click', function() {
-            alert('save');
+            var predictionId = row.find('.prediction-id-checkbox').val();
+
+            if (self.isCategoryType()) {
+                var categoryName = row.find('.edit-value').val();
+                $.post(
+                        '/prediction/edit',
+                        {predictionId: predictionId, predictionName: categoryName},
+                function(response) {
+                    if (response.success) {
+                        row.find('.prediction-name').text(categoryName);
+                        self.removeActionButtons(row);
+                    }
+                },
+                        'json'
+                        );
+            }
         });
 
         $('.action-button-cancel').on('click', function() {

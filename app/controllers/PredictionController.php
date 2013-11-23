@@ -61,6 +61,31 @@ class PredictionController extends BaseController {
     }
     
     /**
+     * Edit prediction
+     * @return string
+     */
+    public function edit()
+    {
+        $response = array('success' => false);
+
+        if (Request::ajax()) {
+            $postData = Input::all();
+
+            $predictionId = $postData['predictionId'];
+            $predictionName = $postData['predictionName'];
+
+            $prediction = Prediction::find($predictionId);
+            $prediction->name = $predictionName;
+            $prediction->save();
+
+            $response['predictionId'] = $prediction->id;
+            $response['success'] = true;
+        }
+
+        return Response::json($response);
+    }
+
+    /**
      * Delete prediction action
      * @return string
      */
