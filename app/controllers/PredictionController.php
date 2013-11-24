@@ -59,24 +59,40 @@ class PredictionController extends BaseController {
 
         return Response::json($response);
     }
-    
+
     /**
      * Edit prediction
      * @return string
      */
     public function edit()
     {
-        $response = array('success' => false);
+        $response = array(
+            'success' => false,
+            'balanceValue' => false
+        );
 
         if (Request::ajax()) {
             $postData = Input::all();
 
-            $predictionId = $postData['predictionId'];
-            $predictionName = $postData['predictionName'];
+            $predictionId = isset($postData['predictionId']) ? $postData['predictionId'] : null;
+            $predictionName = isset($postData['predictionName']) ? $postData['predictionName'] : null;
+            $predictionValue = isset($postData['predictionValue']) ? $postData['predictionValue'] : null;
 
             $prediction = Prediction::find($predictionId);
-            $prediction->name = $predictionName;
-            $prediction->save();
+
+            if ($predictionName) {
+                $prediction->name = $predictionName;
+                $prediction->save();
+            }
+
+            if ($predictionValue) {
+                $tabletId = $prediction->tablet_id;
+                $prediction->value = $predictionValue;
+                $prediction->save();
+                $tablet = Tablet::find($tabletId);
+                $balanceValue = $tablet->getBalance();
+                $response['balanceValue'] = $balanceValue;
+            }
 
             $response['predictionId'] = $prediction->id;
             $response['success'] = true;

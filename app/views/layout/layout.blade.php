@@ -4,7 +4,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="Simple app for personal finances">
+        <meta name="description" content="Hack your personal finances">
         <meta name="author" content="Andrei Boar">
         <title>MoneyTablet.com - The simplest app for personal finances</title>
 

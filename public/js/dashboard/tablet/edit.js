@@ -64,6 +64,22 @@ Tablet.Expense.Edit = {
                         'json'
                         );
             }
+
+            if (self.isPredictionType()) {
+                var predictionValue = row.find('.edit-value').val();
+                $.post(
+                        '/prediction/edit',
+                        {predictionId: predictionId, predictionValue: predictionValue},
+                function(response) {
+                    if (response.success) {
+                        row.find('.prediction-value').text(predictionValue);
+                        self.removeActionButtons(row);
+                        $('#balance-value').text(response.balanceValue);
+                    }
+                },
+                        'json'
+                        );
+            }
         });
 
         $('.action-button-cancel').on('click', function() {
