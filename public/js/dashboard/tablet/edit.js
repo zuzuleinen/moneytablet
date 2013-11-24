@@ -14,7 +14,8 @@ Tablet.Expense.Edit = {
     bindEvents: function() {
         this.cellCategoryName.on('click', this, this.makeEditable);
         this.cellPredictionValue.on('click', this, this.makeEditable);
-        this.cellExpenseValue.on('click', this, this.makeEditable);
+        //disable for now expense editing
+        //this.cellExpenseValue.on('click', this, this.makeEditable);
     },
     makeEditable: function(event) {
         var self = event.data;
