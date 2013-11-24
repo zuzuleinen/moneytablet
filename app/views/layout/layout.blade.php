@@ -4,9 +4,9 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="Hack your personal finances">
+        <meta name="description" content="Simple app for managing personal finances">
         <meta name="author" content="Andrei Boar">
-        <title>MoneyTablet.com - The simplest app for personal finances</title>
+        <title>MoneyTablet.com - Hack your personal finances</title>
 
         {{ HTML::style('css/bootstrap.css') }}
         {{ HTML::style('css/jumbotron.css') }}
