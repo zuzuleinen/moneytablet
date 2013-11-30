@@ -11,6 +11,7 @@
         {{ HTML::style('css/bootstrap.css') }}
         {{ HTML::style('css/jumbotron.css') }}
         {{ HTML::style('css/custom.css') }}
+        {{ HTML::style('css/auth-buttons.css') }}
     </head>
     @show
     <body>
@@ -23,12 +24,11 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="{{ URL::to('/') }}">MoneyTablet</a>
+                    <a class="navbar-brand active" href="{{ URL::to('/') }}">MoneyTablet</a>
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-<!--                        <li class="active"><a href="#">Home</a></li>
-                        <li><a href="#contact">Contact us</a></li>-->
+                        <!--<li><a href="#contact">Contact us</a></li>-->
                     </ul>
                     @section('login')
                     <?php if (!Auth::check()): ?>

@@ -2,12 +2,17 @@
 
 @section('navbar')
 @parent
-<!-- Main jumbotron for a primary marketing message or call to action -->
 <div class="jumbotron">
     <div class="container">
-        <h1>Hello!</h1>
+        <h1>Join us!</h1>
         <p>If you want to manage your personal finances in a simple manner you came to the right place.</p>
-        <p><a href="{{ URL::to('account/create') }}" class="btn btn-primary btn-danger btn-lg">Create an account &raquo;</a></p>
+        <div>
+            <a class="btn-auth btn-facebook large" href="{{URL::to('login/fb')}}">
+                Sign up with <b>Facebook</b>
+            </a>
+            or
+            <a class="red-link" href="{{URL::to('account/create')}}">Sign up by e-mail</a>
+        </div>
     </div>
 </div>
 @stop
