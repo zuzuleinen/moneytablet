@@ -8,7 +8,7 @@
         <p>If you want to manage your personal finances in a simple manner you came to the right place.</p>
         <div>
             <a class="btn-auth btn-facebook large" href="{{URL::to('login/fb')}}">
-                Sign up with <b>Facebook</b>
+                Sign Up with <b>Facebook</b>
             </a>
             or
             <a class="red-link" href="{{URL::to('account/create')}}">Sign up by e-mail</a>
