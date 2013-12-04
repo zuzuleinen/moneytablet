@@ -56,18 +56,29 @@ Route::get('login/fb/callback', function() {
 
             $profile = Profile::whereUid($uid)->first();
             if (empty($profile)) {
+                //check if there is a user registered on clasic way
+                $user = User::whereEmail($email)->first();
+                if ($user) {
+                        $profile = new Profile();
+                        $profile->uid = $uid;
+                        $profile->username = $me['username'];
+                        $profile = $user->profiles()->save($profile); 
+                        
+                } else {
+                        $user = new User();
+                        // $user->name = $me['first_name'] . ' ' . $me['last_name'];
+                        $user->email = $me['email'];
+                        // $user->photo = 'https://graph.facebook.com/' . $me['username'] . '/picture?type=large';
 
-                $user = new User;
-               // $user->name = $me['first_name'] . ' ' . $me['last_name'];
-                $user->email = $me['email'];
-               // $user->photo = 'https://graph.facebook.com/' . $me['username'] . '/picture?type=large';
+                        $user->save();
 
-                $user->save();
+                        $profile = new Profile();
+                        $profile->uid = $uid;
+                        $profile->username = $me['username'];
+                        $profile = $user->profiles()->save($profile);     
+                }
 
-                $profile = new Profile();
-                $profile->uid = $uid;
-                $profile->username = $me['username'];
-                $profile = $user->profiles()->save($profile);
+
             }
 
             $profile->access_token = $facebook->getAccessToken();
