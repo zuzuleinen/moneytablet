@@ -7,6 +7,6 @@
     RewriteRule ^ index.php [L]
 	RewriteEngine On
 	
-        RewriteCond %{HTTP_HOST} !^www.moneytablet.com$ [NC]
-        RewriteRule ^(.*)$ http://www.moneytablet.com/$1 [L,R=301]
+    RewriteCond %{HTTP_HOST} !^www.moneytablet.com$ [NC]
+    RewriteRule ^(.*)$ http://www.moneytablet.com/ [L,R=301]
 </IfModule>
