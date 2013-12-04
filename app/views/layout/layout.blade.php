@@ -56,7 +56,7 @@
             <hr>
             @section('footer')
             <footer>
-                <p>&copy; MoneyTablet.com 2013</p>
+                <p>&copy; MoneyTablet.com 2013. This app was created by <a href="http://www.andreiboar.com/" target="_blank">Andrei Boar</a>. Feel free to <a href="mailto:andrey.boar@gmail.com" target="_blank">e-mail</a> me or <a href="https://github.com/zuzuleinen/moneytablet">contribute</a> to the project.</p>
             </footer>
             @show
         </div>
