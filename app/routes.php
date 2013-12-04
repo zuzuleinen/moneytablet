@@ -90,3 +90,5 @@ Route::get('login/fb/callback', function() {
 
             return Redirect::to('dashboard')->with('message', 'Logged in with Facebook');
         });
+
+Route::get('how-to', array('uses' => 'PageController@howto'));
