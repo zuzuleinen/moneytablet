@@ -28,7 +28,7 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <!--<li><a href="#contact">Contact us</a></li>-->
+                        <li><a href="{{ URL::to('how-to') }}">How does it work</a></li>
                     </ul>
                     @section('login')
                     <?php if (!Auth::check()): ?>
