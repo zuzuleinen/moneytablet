@@ -5,8 +5,4 @@
 	RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
-	RewriteEngine On
-	
-    RewriteCond %{HTTP_HOST} !^www.moneytablet.com$ [NC]
-    RewriteRule ^(.*)$ http://www.moneytablet.com/ [L,R=301]
 </IfModule>
