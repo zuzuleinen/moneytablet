@@ -18,7 +18,7 @@
         <table class="table table-condensed" id="table-prediction-expense" <?php echo ($predictions->count() ? '' : 'style="display: none"') ?>>
             <thead>
                 <tr>
-                    <th><input class="form-control" id="prediction-all-checkbox" type="checkbox" value=""></th>
+                    <th><input autocomplete="off" class="form-control" id="prediction-all-checkbox" type="checkbox" value=""></th>
                     <th>Category</th>
                     <th>Prediction</th>
                     <th>Expense</th>
@@ -27,7 +27,7 @@
             <tbody>
                 @foreach ($predictions as $prediction)
                 <tr>
-                    <td><input class="form-control prediction-id-checkbox" type="checkbox" value="{{ $prediction->id }}"></td>
+                    <td><input autocomplete="off" class="form-control prediction-id-checkbox" type="checkbox" value="{{ $prediction->id }}"></td>
                     <td class="prediction-name">{{ $prediction->name }}</td>
                     <td class="prediction-value">{{ floatval($prediction->value) }}</td>
                     <td class="expense-value">{{ floatval($prediction->getTotalExpenses()) }}</td>
