@@ -26,7 +26,7 @@ return array(
 	|
 	*/
 
-	'url' => 'http://moneytablet.dev',
+	'url' => 'http://moneytablet.com',
 
 	/*
 	|--------------------------------------------------------------------------
