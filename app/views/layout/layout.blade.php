@@ -9,12 +9,11 @@
         <title>MoneyTablet.com - Hack your personal finances</title>
 
         {{ HTML::style('css/bootstrap.css') }}
-        {{ HTML::style('css/jumbotron.css') }}
         {{ HTML::style('css/custom.css') }}
         {{ HTML::style('css/auth-buttons.css') }}
     </head>
     @show
-    <body>
+    <body style="padding-top: 50px; padding-bottom: 20px;">
         @section('navbar')
         <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
