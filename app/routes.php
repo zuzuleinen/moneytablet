@@ -57,7 +57,7 @@ Route::get('login/fb/callback', function() {
             $profile = Profile::whereUid($uid)->first();
             if (empty($profile)) {
                 //check if there is a user registered on clasic way
-                $user = User::whereEmail($email)->first();
+                $user = User::whereEmail($me['email'])->first();
                 if ($user) {
                         $profile = new Profile();
                         $profile->uid = $uid;
