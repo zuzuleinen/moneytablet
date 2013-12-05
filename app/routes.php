@@ -30,8 +30,6 @@ Route::post('income/create', array('before' => 'auth', 'uses' => 'IncomeControll
 
 Route::post('economy/create', array('before' => 'auth', 'uses' => 'EconomyController@create'));
 
-Route::get('test', 'TestController@test');
-
 Route::get('login/fb', function() {
             $facebook = new Facebook(Config::get('facebook'));
             $params = array(

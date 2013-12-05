@@ -1,7 +1,14 @@
 <?php
 
+/**
+ * Income controller class
+ */
 class IncomeController extends BaseController {
-
+    
+    /**
+     * Create income action
+     * @return json
+     */
     public function create()
     {
         $response = array('success' => false);
