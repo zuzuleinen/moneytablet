@@ -26,7 +26,7 @@
             </thead>
             <tbody>
                 @foreach ($predictions as $prediction)
-                <tr>
+                <tr @if ($prediction->value < 0) class="danger" @endif>
                     <td><input autocomplete="off" class="form-control prediction-id-checkbox" type="checkbox" value="{{ $prediction->id }}"></td>
                     <td class="prediction-name">{{ $prediction->name }}</td>
                     <td class="prediction-value">{{ floatval($prediction->value) }}</td>
