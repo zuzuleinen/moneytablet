@@ -7,3 +7,4 @@
 /vendor/
 /nbproject/private/
 composer.phar
+app/config/facebok.php
