@@ -16,7 +16,7 @@ class DashboardController extends BaseController
         $userTablet = $this->_getCurrentTablet();
 
         if ($userTablet) {
-            $predictions = $userTablet->predictions;
+            $predictions = $userTablet->predictions()->orderBy('value', 'desc')->get();
             
             return View::make('dashboard/index', array('tablet' => $userTablet, 'predictions' => $predictions))
                 ->nest('predictionModal', 'dashboard.modal.prediction')
