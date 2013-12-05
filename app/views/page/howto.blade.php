@@ -2,7 +2,7 @@
 @section('content')
 <div class="row">
     <div class="col-md-11">
-        <h3>The philosophy behind it</h3>
+        <h2>The philosophy behind it</h2>
         <p>Because I couldn't find a simple web app for managing my 
             personal finances I created one myself. I know there are a 
             lot of them these days but I wanted something <strong>really simple</strong>, 
