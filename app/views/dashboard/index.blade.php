@@ -58,7 +58,7 @@
             </tbody>
         </table>
         <div class="breadcrumb">
-            <strong>Balance: </strong><span id="balance-value">{{ $tablet->getBalance() }}</span>
+            <strong>Balance: </strong><span id="balance-value" @if ($tablet->getBalance() < 0) class="text-danger" @endif>{{ $tablet->getBalance() }}</span>
         </div>
     </div>
 </div>
