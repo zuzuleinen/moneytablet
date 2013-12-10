@@ -139,7 +139,7 @@ Tablet.Prediction = {
                 self.addExpenseButton.show();
                 self.tablePredictionExpense.show();
                 self.addPredictionModal.modal('hide');
-                var lineHtml = '<tr><td><input class="form-control prediction-id-checkbox" type="checkbox" value="'
+                var lineHtml = '<tr><td><input class="prediction-id-checkbox" type="checkbox" value="'
                         + response.predictionId + '"></td><td class="prediction-name">'
                         + predictionName
                         + '</td><td class="prediction-value">'
