@@ -1,20 +1,14 @@
 @extends('layout/layout')
 @section('content')
-<h4>Dashboard</h4>
 <div class="row">
-    <div class="col-md-4">
-        <button id="add-new-prediction" type="button" class="btn btn-default btn-xs">Add prediction</button>
-        <button id="add-new-expense-button" type="button" class="btn btn-default btn-xs" <?php echo ($predictions->count() ? '' : 'style="display: none"') ?>>Add expense</button>
-        <button id="delete-predictions" type="button" class="btn btn-default btn-xs" style="display: none;">Delete</button>
-    </div>
-    <div class="col-md-6 col-md-offset-2">
-        <button id="add-new-income" type="button" class="btn btn-default btn-xs">Add income</button>
-        <button id="add-new-economy" type="button" class="btn btn-default btn-xs">Add economy</button>
-    </div>
+    <h4>Dashboard</h4>
 </div>
 <div class="row">
     <input type="hidden" name="tablet_id" value="{{ $tablet->id }}" />
     <div class="col-md-5">
+        <button id="add-new-prediction" type="button" class="btn btn-default btn-xs">Add prediction</button>
+        <button id="add-new-expense-button" type="button" class="btn btn-default btn-xs" <?php echo ($predictions->count() ? '' : 'style="display: none"') ?>>Add expense</button>
+        <button id="delete-predictions" type="button" class="btn btn-default btn-xs" style="display: none;">Delete</button>
         <table class="table table-condensed" id="table-prediction-expense" <?php echo ($predictions->count() ? '' : 'style="display: none"') ?>>
             <thead>
                 <tr>
@@ -27,7 +21,7 @@
             <tbody>
                 @foreach ($predictions as $prediction)
                 <tr @if ($prediction->value < 0) class="danger" @endif>
-                    <td><input autocomplete="off" class="prediction-id-checkbox" type="checkbox" value="{{ $prediction->id }}"></td>
+                     <td><input autocomplete="off" class="prediction-id-checkbox" type="checkbox" value="{{ $prediction->id }}"></td>
                     <td class="prediction-name">{{ $prediction->name }}</td>
                     <td class="prediction-value">{{ floatval($prediction->value) }}</td>
                     <td class="expense-value">{{ floatval($prediction->getTotalExpenses()) }}</td>
@@ -37,6 +31,8 @@
         </table>
     </div>
     <div class="col-md-6 col-md-offset-1">
+        <button id="add-new-income" type="button" class="btn btn-default btn-xs">Add income</button>
+        <button id="add-new-economy" type="button" class="btn btn-default btn-xs">Add economy</button>
         <table class="table table-condensed" id="tablet-totals">
             <thead>
                 <tr>
