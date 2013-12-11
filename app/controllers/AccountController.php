@@ -114,5 +114,14 @@ class AccountController extends BaseController
     {
         return View::make('account/success');
     }
+    
+    /**
+     * Forgot password action
+     * @return string
+     */
+    public function forgotPassword()
+    {
+        return View::make('account/forgot-password');
+    }
 
 }

@@ -91,3 +91,13 @@ Route::get('login/fb/callback', function() {
         });
 
 Route::get('how-to', array('uses' => 'PageController@howto'));
+
+Route::get('password/forgot', array('before' => 'guest', 'uses' => 'AccountController@forgotPassword'));
+
+
+Route::post('password/remind', function()
+{
+    $credentials = array('email' => Input::get('email'));
+    
+    return Password::remind($credentials);
+});
