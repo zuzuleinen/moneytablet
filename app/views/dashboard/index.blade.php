@@ -6,8 +6,8 @@
 <div class="row">
     <input type="hidden" name="tablet_id" value="{{ $tablet->id }}" />
     <div class="col-md-5">
-        <button id="add-new-prediction" type="button" class="btn btn-default btn-xs">Add prediction</button>
-        <button id="add-new-expense-button" type="button" class="btn btn-default btn-xs" <?php echo ($predictions->count() ? '' : 'style="display: none"') ?>>Add expense</button>
+        <button id="add-new-prediction" type="button" class="btn btn-primary btn-xs">Add prediction</button>
+        <button id="add-new-expense-button" type="button" class="btn btn-danger btn-xs" <?php echo ($predictions->count() ? '' : 'style="display: none"') ?>>Add expense</button>
         <button id="delete-predictions" type="button" class="btn btn-default btn-xs" style="display: none;">Delete</button>
         <table class="table table-condensed" id="table-prediction-expense" <?php echo ($predictions->count() ? '' : 'style="display: none"') ?>>
             <thead>
@@ -31,8 +31,8 @@
         </table>
     </div>
     <div class="col-md-6 col-md-offset-1">
-        <button id="add-new-income" type="button" class="btn btn-default btn-xs">Add income</button>
-        <button id="add-new-economy" type="button" class="btn btn-default btn-xs">Add economy</button>
+        <button id="add-new-income" type="button" class="btn btn-success btn-xs">Add income</button>
+        <button id="add-new-economy" type="button" class="btn btn-warning btn-xs">Add economy</button>
         <table class="table table-condensed" id="tablet-totals">
             <thead>
                 <tr>
