@@ -34,10 +34,15 @@
     </div>
     <div class="form-group">
         <div class="col-lg-offset-2 col-lg-10">
-            <button id="create-account-button" type="submit" class="btn btn-danger btn-primary">Sign In</button> or <a href="{{ URL::to('account/create') }}">Create your account</a>
+            <button id="create-account-button" type="submit" class="btn btn-danger btn-primary">Sign In</button> or <strong><a href="{{ URL::to('account/create') }}">Create your account</a></strong>
         </div>
     </div>
 </form>
+<div class="row">
+    <div class="col-md-4 col-md-offset-2">
+        <p><a href="{{URL::to('password/forgot')}}">Forgot your password?</a></p>
+    </div>
+</div>
 @stop
 @section('footer-js-scripts')
 @parent
