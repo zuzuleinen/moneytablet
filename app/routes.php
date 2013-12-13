@@ -101,3 +101,4 @@ Route::post('password/remind', function()
     
     return Password::remind($credentials);
 });
+Route::get('password/remind', array('before' => 'guest', 'uses' => 'AccountController@remindSuccess'));
