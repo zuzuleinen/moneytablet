@@ -31,15 +31,31 @@
                     </ul>
                     @section('login')
                     <?php if (!Auth::check()): ?>
-                        <form action="{{ URL::to('account/loginPost') }}" class="navbar-form navbar-right" method="POST">
-                            <div class="form-group">
-                                <input name="email" type="text" placeholder="Email" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <input name="password" type="password" placeholder="Password" class="form-control">
-                            </div>
-                            <button type="submit" class="btn btn-success">Sign in</button>
-                        </form>
+                    <?php $path = Request::path() ?>
+                        <?php if ($path != 'password/forgot'): ?>
+                            <form action="{{ URL::to('account/loginPost') }}" class="navbar-form navbar-right" method="POST">
+                                <div class="form-group">
+                                    <input name="email" type="text" placeholder="Email" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <input name="password" type="password" placeholder="Password" class="form-control">
+                                </div>
+                                <button type="submit" class="btn btn-success">Sign in</button>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="checkbox">
+                                            <input type="checkbox" value="1" name="remember" id="remember-checkbox-front">
+                                            <label for="remember-checkbox-front" id="remember-label-front">Keep me signed in</label><br>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5 col-md-offset-1">
+                                        <div class="checkbox">
+                                            <a id="remember-front" href="{{URL::to('password/forgot')}}">Forgot your password?</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        <?php endif; ?>
                     <?php else: ?>
                         <ul class="nav navbar-nav navbar-right">
                             <li><a href="{{ URL::to('account/logOut')}}">Log Out</a></li>

@@ -51,5 +51,13 @@
 .table-condensed thead > tr > td,
 .table-condensed tbody > tr > td,
 .table-condensed tfoot > tr > td {
-  padding: 3px;
+    padding: 3px;
+}
+
+#remember-front, #remember-label-front {
+    color: #D4D4D4;
+}
+
+#remember-checkbox-front {
+    float: left;
 }
