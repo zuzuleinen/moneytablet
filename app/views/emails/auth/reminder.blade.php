@@ -5,9 +5,8 @@
     </head>
     <body>
         <h2>Password Reset</h2>
-
         <div>
-            To reset your password, complete this form: {{ URL::to('password/reset', array($token)) }}.
+            To reset your password, complete this form: <a href="{{ URL::to('password/reset', array($token)) }}">{{ URL::to('password/reset', array($token)) }}</a>.
         </div>
     </body>
 </html>
