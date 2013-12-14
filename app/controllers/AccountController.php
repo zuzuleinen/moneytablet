@@ -41,6 +41,15 @@ class AccountController extends BaseController {
                             ->with('email', $postData['email']);
         }
 
+        //check if user is confirmed
+        $user = User::where('email', $postData['email'])->first();
+
+        if ($user->confirmation !== null) {
+            return Redirect::to('account/login')
+                            ->with('notconfirmed', true)
+                            ->with('email', $postData['email']);
+        }
+
         $rememberMe = (isset($postData['remember']) && $postData['remember'] == 1) ? true : false;
 
         if (Auth::attempt(array('email' => $postData['email'], 'password' => $postData['password']), $rememberMe)) {
@@ -92,10 +101,39 @@ class AccountController extends BaseController {
         $user = new User();
         $user->email = $postData['email'];
         $user->password = Hash::make($postData['password1']);
+        $user->confirmation = uniqid();
+        $user->save();
+
+        //@TODO Put this in a listener
+        $data = array();
+        $data['confirmation'] = $user->confirmation;
+        Mail::send('emails.confirmation', $data, function($message) use($user) {
+                    $message->to($user->email)->subject('Welcome to MoneyTablet.com!');
+                });
+
+        $message = sprintf('We have sent you an e-mail to <strong>%s</strong>. Please check it to confirm your account.', $postData['email']);
+        return Redirect::to('account/success')
+                        ->with('message', $message);
+    }
+
+    public function confirm($confirmation)
+    {
+        try {
+            $user = User::where('confirmation', $confirmation)->firstOrFail();
+        } catch (Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            $message = 'Invalid confirmation code.';
+            return Redirect::to('account/error')->with('message', $message);
+        }
+
         $user->confirmation = null;
         $user->save();
 
-        return Redirect::to('account/success');
+        $loginUrl = URL::to('account/login');
+        $message = sprintf(
+                'You have successfully confirmed your account. You can <strong><a href="%s">login</a></strong> now.', $loginUrl
+        );
+
+        return Redirect::to('account/success')->with('message', $message);
     }
 
     public function logOut()
@@ -106,14 +144,33 @@ class AccountController extends BaseController {
     }
 
     /**
-     * Success page after user registration
+     * Success page with a message from session
      * @return string
      */
     public function success()
     {
-        return View::make('account/success');
+        $message = Session::get('message', null);
+        if (!$message) {
+            return Redirect::to('/');
+        }
+
+        return View::make('account/success', array('message' => $message));
     }
-    
+
+    /**
+     * Error page with a message from session
+     * @return string
+     */
+    public function error()
+    {
+        $message = Session::get('message', null);
+        if (!$message) {
+            return Redirect::to('/');
+        }
+
+        return View::make('account/error', array('message' => $message));
+    }
+
     /**
      * Password remind action
      * @return string
@@ -122,7 +179,7 @@ class AccountController extends BaseController {
     {
         return View::make('account/password-remind');
     }
-    
+
     /**
      * Password reset success action
      * @return string
@@ -131,4 +188,5 @@ class AccountController extends BaseController {
     {
         return View::make('account/password-reset-success');
     }
+
 }
