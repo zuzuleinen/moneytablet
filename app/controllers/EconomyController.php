@@ -21,9 +21,9 @@ class EconomyController extends BaseController {
                 'tabletId.required' => 'Please select a tablet.',
                 'tabletId.not_in' => 'Please select a tablet.',
                 'tabletId.exists' => 'An error occured. Please try later.',
-                'economyValue.required' => 'Please enter economy value.',
-                'economyValue.numeric' => 'Economy must be a numeric value. Ex: 90, 3.42',
-                'economyValue.min' => 'Economy must have a positive value.'
+                'economyValue.required' => 'Please enter savings value.',
+                'economyValue.numeric' => 'Savings must be a numeric value. Ex: 90, 3.42',
+                'economyValue.min' => 'Savings must have a positive value.'
             );
 
             $validator = Validator::make($postData, $rules, $messages);

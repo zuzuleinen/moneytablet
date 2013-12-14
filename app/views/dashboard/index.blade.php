@@ -32,14 +32,14 @@
     </div>
     <div class="col-md-6 col-md-offset-1">
         <button id="add-new-income" type="button" class="btn btn-success btn-xs">Add income</button>
-        <button id="add-new-economy" type="button" class="btn btn-warning btn-xs">Add economy</button>
+        <button id="add-new-economy" type="button" class="btn btn-warning btn-xs">Add savings</button>
         <table class="table table-condensed" id="tablet-totals">
             <thead>
                 <tr>
                     <th>Income</th>
                     <th>Total expenses</th>
                     <th>Current money</th>
-                    <th>Economies</th>
+                    <th>Savings</th>
                 </tr>
             </thead>
             <tbody>

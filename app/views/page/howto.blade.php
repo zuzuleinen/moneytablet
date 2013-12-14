@@ -18,7 +18,7 @@
         <h3>Start by creating a tablet</h3>
         <p>A tablet is a <strong>personal budget</strong>. It's up to you on what period of 
             time you decide to use it. All you need to add is your 
-            current income and economies if any. A tablet is currency agnostic, 
+            current income and savings if any. A tablet is currency agnostic, 
             you can have only one active and you can close it any time.
         </p>
     </div>

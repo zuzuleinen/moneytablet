@@ -17,7 +17,7 @@
         <span class="help-block"><?php echo $errors->first('amount'); ?></span>
     </div>
     <div class="form-group <?php echo ($errors->has('economies')) ? 'has-error' : '' ?>">
-        <label for="economies" class="col-lg-2 control-label">Economies</label>
+        <label for="economies" class="col-lg-2 control-label">Savings</label>
         <div class="col-lg-3">
             <input autocomplete="off" name="economies" id="economies" type="text" class="form-control" value="<?php echo Session::get('economies') ?>" >
         </div>
