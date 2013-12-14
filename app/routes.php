@@ -104,6 +104,9 @@ Route::get('password/reset/{token}', function($token) {
             return View::make('account/reset-password')->with('token', $token);
         });
 
+Route::get('reset/success', array('before' => 'guest', 'uses' => 'AccountController@resetSuccess'));
+
+
 Route::post('password/reset/{token}', function() {
             $credentials = array(
                 'email' => Input::get('email'),
@@ -116,6 +119,6 @@ Route::post('password/reset/{token}', function() {
                                 $user->password = Hash::make($password);
                                 $user->save();
 
-                                return Redirect::to('/');
+                                return Redirect::to('reset/success');
                             });
         });

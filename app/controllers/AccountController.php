@@ -122,4 +122,13 @@ class AccountController extends BaseController {
     {
         return View::make('account/password-remind');
     }
+    
+    /**
+     * Password reset success action
+     * @return string
+     */
+    public function resetSuccess()
+    {
+        return View::make('account/password-reset-success');
+    }
 }
