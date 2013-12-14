@@ -32,91 +32,93 @@ Route::post('economy/create', array('before' => 'auth', 'uses' => 'EconomyContro
 
 
 Route::get('login/fb', function() {
-    $facebook = new Facebook(Config::get('facebook'));
-    $params = array(
-        'redirect_uri' => url('/login/fb/callback'),
-        'scope' => 'email',
-    );
-    return Redirect::to($facebook->getLoginUrl($params));
-});
+            $facebook = new Facebook(Config::get('facebook'));
+            $params = array(
+                'redirect_uri' => url('/login/fb/callback'),
+                'scope' => 'email',
+            );
+            return Redirect::to($facebook->getLoginUrl($params));
+        });
 
 Route::get('login/fb/callback', function() {
-    $code = Input::get('code');
-    if (strlen($code) == 0)
-        return Redirect::to('/')->with('message', 'There was an error communicating with Facebook');
+            $code = Input::get('code');
+            if (strlen($code) == 0)
+                return Redirect::to('/')->with('message', 'There was an error communicating with Facebook');
 
-    $facebook = new Facebook(Config::get('facebook'));
-    $uid = $facebook->getUser();
+            $facebook = new Facebook(Config::get('facebook'));
+            $uid = $facebook->getUser();
 
-    if ($uid == 0)
-        return Redirect::to('/')->with('message', 'There was an error');
+            if ($uid == 0)
+                return Redirect::to('/')->with('message', 'There was an error');
 
-    $me = $facebook->api('/me');
+            $me = $facebook->api('/me');
 
-    $profile = Profile::whereUid($uid)->first();
-    if (empty($profile)) {
-        //check if there is a user registered on clasic way
-        $user = User::whereEmail($me['email'])->first();
-        if ($user) {
-            $profile = new Profile();
-            $profile->uid = $uid;
-            $profile->username = $me['username'];
-            $profile = $user->profiles()->save($profile);
-        } else {
-            $user = new User();
-            // $user->name = $me['first_name'] . ' ' . $me['last_name'];
-            $user->email = $me['email'];
-            // $user->photo = 'https://graph.facebook.com/' . $me['username'] . '/picture?type=large';
+            $profile = Profile::whereUid($uid)->first();
+            if (empty($profile)) {
+                //check if there is a user registered on clasic way
+                $user = User::whereEmail($me['email'])->first();
+                if ($user) {
+                    $profile = new Profile();
+                    $profile->uid = $uid;
+                    $profile->username = $me['username'];
+                    $profile = $user->profiles()->save($profile);
+                } else {
+                    $user = new User();
+                    // $user->name = $me['first_name'] . ' ' . $me['last_name'];
+                    $user->email = $me['email'];
+                    // $user->photo = 'https://graph.facebook.com/' . $me['username'] . '/picture?type=large';
 
-            $user->save();
+                    $user->save();
 
-            $profile = new Profile();
-            $profile->uid = $uid;
-            $profile->username = $me['username'];
-            $profile = $user->profiles()->save($profile);
-        }
-    }
+                    $profile = new Profile();
+                    $profile->uid = $uid;
+                    $profile->username = $me['username'];
+                    $profile = $user->profiles()->save($profile);
+                }
+            }
 
-    $profile->access_token = $facebook->getAccessToken();
-    $profile->save();
+            $profile->access_token = $facebook->getAccessToken();
+            $profile->save();
 
-    $user = $profile->user;
+            $user = $profile->user;
 
-    Auth::login($user);
+            Auth::login($user);
 
-    return Redirect::to('dashboard')->with('message', 'Logged in with Facebook');
-});
+            return Redirect::to('dashboard')->with('message', 'Logged in with Facebook');
+        });
 
 Route::get('how-to', array('uses' => 'PageController@howto'));
 
-Route::get('password/forgot', array('before' => 'guest', 'uses' => 'AccountController@forgotPassword'));
-
-
 Route::post('password/remind', function() {
-    $credentials = array('email' => Input::get('email'));
+            $credentials = array('email' => Input::get('email'));
 
-    return Password::remind($credentials);
-});
-Route::get('password/remind', array('before' => 'guest', 'uses' => 'AccountController@remindSuccess'));
+            return Password::remind($credentials, function($message, $user) {
+                                $message->subject('Reset your password');
+                            });
+        });
+Route::get('password/remind', array('before' => 'guest', 'uses' => 'AccountController@passwordRemind'));
 
 
 
 Route::get('password/reset/{token}', function($token) {
-    return View::make('account/reset-password')->with('token', $token);
-});
+            return View::make('account/reset-password')->with('token', $token);
+        });
+
+Route::get('reset/success', array('before' => 'guest', 'uses' => 'AccountController@resetSuccess'));
+
 
 Route::post('password/reset/{token}', function() {
-    $credentials = array(
-        'email' => Input::get('email'),
-        'password' => Input::get('password'),
-        'password_confirmation' => Input::get('password_confirmation')
-    );
+            $credentials = array(
+                'email' => Input::get('email'),
+                'password' => Input::get('password'),
+                'password_confirmation' => Input::get('password_confirmation')
+            );
 
-    return Password::reset($credentials, function($user, $password) {
+            return Password::reset($credentials, function($user, $password) {
 
-            $user->password = Hash::make($password);
-            $user->save();
+                                $user->password = Hash::make($password);
+                                $user->save();
 
-            return Redirect::to('/');
+                                return Redirect::to('reset/success');
+                            });
         });
-});
