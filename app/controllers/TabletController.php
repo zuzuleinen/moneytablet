@@ -36,7 +36,7 @@ class TabletController extends BaseController
             'name.required' => 'Please enter your tablet name.',
             'amount.required' => 'Please enter your tablet amount.',
             'amount.numeric' => 'Amount must be a numeric value. Ex: 90, 3.42',
-            'economies.numeric' => 'Economies field must be a numeric value. Ex: 90, 3.42'
+            'economies.numeric' => 'Savings field must be a numeric value. Ex: 90, 3.42'
         );
 
         $validator = Validator::make($postData, $rules, $messages);
