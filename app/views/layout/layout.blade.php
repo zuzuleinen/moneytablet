@@ -32,7 +32,7 @@
                     @section('login')
                     <?php if (!Auth::check()): ?>
                     <?php $path = Request::path() ?>
-                        <?php if ($path != 'password/forgot'): ?>
+                        <?php if ($path != 'password/remind'): ?>
                             <form action="{{ URL::to('account/loginPost') }}" class="navbar-form navbar-right" method="POST">
                                 <div class="form-group">
                                     <input name="email" type="text" placeholder="Email" class="form-control">
@@ -50,7 +50,7 @@
                                     </div>
                                     <div class="col-md-5 col-md-offset-1">
                                         <div class="checkbox">
-                                            <a id="remember-front" href="{{URL::to('password/forgot')}}">Forgot your password?</a>
+                                            <a id="remember-front" href="{{URL::to('password/remind')}}">Forgot your password?</a>
                                         </div>
                                     </div>
                                 </div>

@@ -6,8 +6,7 @@
  *
  * @author Andrei Boar <andrey.boar@gmail.com>
  */
-class AccountController extends BaseController
-{
+class AccountController extends BaseController {
 
     public function index()
     {
@@ -38,8 +37,8 @@ class AccountController extends BaseController
 
         if ($validator->fails()) {
             return Redirect::to('account/login')
-                    ->withErrors($validator)
-                    ->with('email', $postData['email']);
+                            ->withErrors($validator)
+                            ->with('email', $postData['email']);
         }
 
         $rememberMe = (isset($postData['remember']) && $postData['remember'] == 1) ? true : false;
@@ -86,8 +85,8 @@ class AccountController extends BaseController
 
         if ($validator->fails()) {
             return Redirect::to('account/create')
-                    ->withErrors($validator)
-                    ->with('email', $postData['email']);
+                            ->withErrors($validator)
+                            ->with('email', $postData['email']);
         }
 
         $user = new User();
@@ -116,21 +115,11 @@ class AccountController extends BaseController
     }
     
     /**
-     * Forgot password action
+     * Password remind action
      * @return string
      */
-    public function forgotPassword()
+    public function passwordRemind()
     {
-        return View::make('account/forgot-password');
+        return View::make('account/password-remind');
     }
-    
-    /**
-     * Success page after sending the reset password e-mail
-     * @return string
-     */
-    public function remindSuccess()
-    {
-        return View::make('account/remind-success');
-    }
-
 }
