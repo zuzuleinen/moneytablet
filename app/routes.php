@@ -10,7 +10,9 @@ Route::get('account/login', array('before' => 'guest', 'uses' => 'AccountControl
 Route::post('account/loginPost', array('before' => 'guest', 'uses' => 'AccountController@loginPost'));
 Route::get('account/create', array('before' => 'guest', 'uses' => 'AccountController@create'));
 Route::post('account/createPost', array('before' => 'guest', 'uses' => 'AccountController@createPost'));
+Route::get('account/confirm/{confirmation}', array('before' => 'guest', 'uses' => 'AccountController@confirm'));
 Route::get('account/success', array('before' => 'guest', 'uses' => 'AccountController@success'));
+Route::get('account/error', array('before' => 'guest', 'uses' => 'AccountController@error'));
 Route::get('account/logOut', 'AccountController@logOut');
 
 Route::get('dashboard', array('before' => 'auth', 'uses' => 'DashboardController@index'));

@@ -8,6 +8,11 @@
         <strong>Oh snap!</strong> The e-mail/password combination is incorrect.
     </div>
 <?php endif; ?>
+<?php if (Session::get('notconfirmed')): ?>
+    <div class="alert alert-danger">
+        <strong>Oh snap!</strong> Your account has not been confirmed.
+    </div>
+<?php endif; ?>
 <form name="login-user-form" action="{{ URL::to('account/loginPost') }}" method="POST" class="form-horizontal" role="form">
     <div class="form-group <?php echo ($errors->has('email')) ? 'has-error' : '' ?>">
         <label for="email" class="col-lg-2 control-label">Email</label>
