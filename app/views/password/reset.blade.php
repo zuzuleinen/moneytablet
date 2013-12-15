@@ -4,11 +4,11 @@
     <h2>Enter your new password</h2>
     @if (Session::has('error'))
     <div class="alert alert-danger">
-        <strong>Oh snap! </strong>{{ trans(Session::get('reason')) }}
+        <strong>Oh snap! </strong>{{ trans(Session::get('error')) }}
     </div>
     @endif
     <div class="col-md-6">
-        <form class="form-horizontal" role="form" method="POST" action="">
+        <form class="form-horizontal" role="form" method="POST" action="{{ action('RemindersController@postReset') }}">
             <input type="hidden" name="token" value="{{ $token }}">
             <div class="form-group">
                 <label for="inputEmail3" class="col-md-2 control-label">Email</label>

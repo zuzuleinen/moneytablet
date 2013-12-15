@@ -45,7 +45,7 @@
 </form>
 <div class="row">
     <div class="col-md-4 col-md-offset-2">
-        <p><a href="{{URL::to('password/remind')}}">Forgot your password?</a></p>
+        <p><a href="{{URL::to('password/getRemind')}}">Forgot your password?</a></p>
     </div>
 </div>
 @stop
