@@ -8,7 +8,7 @@ Route::get('/', array('before' => 'guest', 'uses' => 'HomeController@index'));
 Route::get('account', array('before' => 'guest', 'uses' => 'AccountController@index'));
 Route::get('account/login', array('before' => 'guest', 'uses' => 'AccountController@login'));
 Route::post('account/loginPost', array('before' => 'guest', 'uses' => 'AccountController@loginPost'));
-Route::get('account/create', array('before' => 'guest', 'uses' => 'AccountController@create'));
+Route::get('account/create', array('as' => 'registration','before' => 'guest', 'uses' => 'AccountController@create'));
 Route::post('account/createPost', array('before' => 'guest', 'uses' => 'AccountController@createPost'));
 Route::get('account/confirm/{confirmation}', array('before' => 'guest', 'uses' => 'AccountController@confirm'));
 Route::get('account/success', array('before' => 'guest', 'uses' => 'AccountController@success'));
@@ -94,8 +94,8 @@ Route::get('how-to', array('uses' => 'PageController@howto'));
 /**
  * Password remind routes
  */
-Route::get('password/getRemind', array('before' => 'guest', 'uses' => 'RemindersController@getRemind'));
+Route::get('password/getRemind', array('as' => 'remind-password','before' => 'guest', 'uses' => 'RemindersController@getRemind'));
 Route::post('password/postRemind', array('before' => 'guest', 'uses' => 'RemindersController@postRemind'));
-Route::get('password/getReset/{token}', array('before' => 'guest', 'uses' => 'RemindersController@getReset'));
+Route::get('password/getReset/{token}', array('as' => 'reset-password','before' => 'guest', 'uses' => 'RemindersController@getReset'));
 Route::post('password/postReset', array('before' => 'guest', 'uses' => 'RemindersController@postReset'));
-Route::get('reset/success', array('before' => 'guest', 'uses' => 'AccountController@resetSuccess'));
+Route::get('reset/success', array('as' => 'reset-password-success','before' => 'guest', 'uses' => 'AccountController@resetSuccess'));
