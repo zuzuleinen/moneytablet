@@ -5,7 +5,8 @@
  * 
  * @author Andrei Boar <andrey.boar@gmail.com>
  */
-class PredictionController extends BaseController {
+class PredictionController extends BaseController
+{
 
     /**
      * Create prediction action
@@ -76,7 +77,7 @@ class PredictionController extends BaseController {
 
             $predictionId = isset($postData['predictionId']) ? $postData['predictionId'] : null;
             $predictionName = isset($postData['predictionName']) ? $postData['predictionName'] : null;
-            $predictionValue = isset($postData['predictionValue']) ? $postData['predictionValue'] : null;
+            $predictionValue = isset($postData['predictionValue']) ? (int) $postData['predictionValue'] : null;
 
             $prediction = Prediction::find($predictionId);
 
@@ -85,14 +86,14 @@ class PredictionController extends BaseController {
                 $prediction->save();
             }
 
-            if ($predictionValue) {
-                $tabletId = $prediction->tablet_id;
-                $prediction->value = $predictionValue;
-                $prediction->save();
-                $tablet = Tablet::find($tabletId);
-                $balanceValue = $tablet->getBalance();
-                $response['balanceValue'] = $balanceValue;
-            }
+
+            $tabletId = $prediction->tablet_id;
+            $prediction->value = $predictionValue;
+            $prediction->save();
+            $tablet = Tablet::find($tabletId);
+            $balanceValue = $tablet->getBalance();
+            $response['balanceValue'] = $balanceValue;
+
 
             $response['predictionId'] = $prediction->id;
             $response['success'] = true;
