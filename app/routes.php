@@ -91,36 +91,11 @@ Route::get('login/fb/callback', function() {
 
 Route::get('how-to', array('uses' => 'PageController@howto'));
 
-Route::post('password/remind', function() {
-            $credentials = array('email' => Input::get('email'));
-
-            return Password::remind($credentials, function($message, $user) {
-                                $message->subject('Reset your password');
-                            });
-        });
-Route::get('password/remind', array('before' => 'guest', 'uses' => 'AccountController@passwordRemind'));
-
-
-
-Route::get('password/reset/{token}', function($token) {
-            return View::make('account/reset-password')->with('token', $token);
-        });
-
+/**
+ * Password remind routes
+ */
+Route::get('password/getRemind', array('before' => 'guest', 'uses' => 'RemindersController@getRemind'));
+Route::post('password/postRemind', array('before' => 'guest', 'uses' => 'RemindersController@postRemind'));
+Route::get('password/getReset/{token}', array('before' => 'guest', 'uses' => 'RemindersController@getReset'));
+Route::post('password/postReset', array('before' => 'guest', 'uses' => 'RemindersController@postReset'));
 Route::get('reset/success', array('before' => 'guest', 'uses' => 'AccountController@resetSuccess'));
-
-
-Route::post('password/reset/{token}', function() {
-            $credentials = array(
-                'email' => Input::get('email'),
-                'password' => Input::get('password'),
-                'password_confirmation' => Input::get('password_confirmation')
-            );
-
-            return Password::reset($credentials, function($user, $password) {
-
-                                $user->password = Hash::make($password);
-                                $user->save();
-
-                                return Redirect::to('reset/success');
-                            });
-        });

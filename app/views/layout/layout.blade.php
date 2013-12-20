@@ -32,7 +32,7 @@
                     @section('login')
                     <?php if (!Auth::check()): ?>
                     <?php $route = Route::currentRouteName();
-                    $nowAllowedPaths = array('get password/remind', 'get password/reset/{token}', 'get account/create', 'get reset/success');
+                    $nowAllowedPaths = array('get password/getRemind', 'get password/reset/{token}', 'get account/create', 'get reset/success');
                     ?>
                         <?php if (!in_array($route, $nowAllowedPaths)): ?>
                             <form action="{{ URL::to('account/loginPost') }}" class="navbar-form navbar-right" method="POST">
@@ -52,7 +52,7 @@
                                     </div>
                                     <div class="col-md-5 col-md-offset-1">
                                         <div class="checkbox">
-                                            <a id="remember-front" href="{{URL::to('password/remind')}}">Forgot your password?</a>
+                                            <a id="remember-front" href="{{URL::to('password/getRemind')}}">Forgot your password?</a>
                                         </div>
                                     </div>
                                 </div>
