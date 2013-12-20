@@ -32,7 +32,7 @@
                     @section('login')
                     <?php if (!Auth::check()): ?>
                     <?php $route = Route::currentRouteName();
-                    $nowAllowedPaths = array('get password/getRemind', 'get password/reset/{token}', 'get account/create', 'get reset/success');
+                    $nowAllowedPaths = array('remind-password', 'reset-password', 'registration', 'reset-password-success');
                     ?>
                         <?php if (!in_array($route, $nowAllowedPaths)): ?>
                             <form action="{{ URL::to('account/loginPost') }}" class="navbar-form navbar-right" method="POST">
