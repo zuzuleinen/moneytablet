@@ -31,6 +31,7 @@ Route::post('expense/create', array('before' => 'auth', 'uses' => 'ExpenseContro
 Route::post('income/create', array('before' => 'auth', 'uses' => 'IncomeController@create'));
 
 Route::post('economy/create', array('before' => 'auth', 'uses' => 'EconomyController@create'));
+Route::post('economy/edit', array('before' => 'auth', 'uses' => 'EconomyController@edit'));
 
 
 Route::get('login/fb', function() {
