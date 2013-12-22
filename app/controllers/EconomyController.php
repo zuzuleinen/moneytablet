@@ -55,4 +55,34 @@ class EconomyController extends BaseController {
         return Response::json($response);
     }
 
+    /**
+     * Edit econonomy action
+     * 
+     * @return Response
+     */
+    public function edit()
+    {
+        $response = array(
+            'success' => false,
+        );
+
+        if (Request::ajax()) {
+            $postData = Input::all();
+
+            $economyValue = (float) $postData['economyValue'];
+
+            $currentUserId = Auth::user()->id;
+
+            if ($currentUserId) {
+                $tablet = new Tablet();
+                $tablet = $tablet->loadByUserId($currentUserId);
+                $tablet->economies = $economyValue;
+                $tablet->save();
+                $response['success'] = true;
+            }
+        }
+
+        return Response::json($response);
+    }
+
 }

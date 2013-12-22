@@ -8,12 +8,15 @@ Tablet.Expense.Edit = {
     init: function() {
         this.cellCategoryName = $('.prediction-name');
         this.cellPredictionValue = $('.prediction-value');
+        this.cellEconomiesValue = $('#tablet-economies');
+
         this.cellExpenseValue = $('.expense-value');
         this.bindEvents();
     },
     bindEvents: function() {
         this.cellCategoryName.on('click', this, this.makeEditable);
         this.cellPredictionValue.on('click', this, this.makeEditable);
+        this.cellEconomiesValue.on('click', this, this.makeEditable);
         //disable for now expense editing
         //this.cellExpenseValue.on('click', this, this.makeEditable);
     },
@@ -41,6 +44,10 @@ Tablet.Expense.Edit = {
 
         if (elemObj.hasClass('expense-value')) {
             this.type = 'expense';
+        }
+
+        if (elemObj.attr('id') === 'tablet-economies') {
+            this.type = 'economy';
         }
     },
     showActionButtons: function(row) {
@@ -81,6 +88,21 @@ Tablet.Expense.Edit = {
                         'json'
                         );
             }
+
+            if (self.isEconomyType()) {
+                var economyValue = row.find('.edit-value').val();
+                $.post(
+                        '/economy/edit',
+                        {economyValue: economyValue},
+                function(response) {
+                    if (response.success) {
+                        row.find('#tablet-economies').text(economyValue);
+                        self.removeActionButtons(row);
+                    }
+                },
+                        'json'
+                        );
+            }
         });
 
         $('.action-button-cancel').on('click', function() {
@@ -103,6 +125,9 @@ Tablet.Expense.Edit = {
         if (this.isExpenseType()) {
             row.find('.expense-value').text(this.prevSelectedValue);
         }
+        if (this.isEconomyType()) {
+            row.find('#tablet-economies').text(this.prevSelectedValue);
+        }
     },
     isPredictionType: function() {
         if (this.getEditType() === 'prediction') {
@@ -118,6 +143,12 @@ Tablet.Expense.Edit = {
     },
     isExpenseType: function() {
         if (this.getEditType() === 'expense') {
+            return true;
+        }
+        return false;
+    },
+    isEconomyType: function() {
+        if (this.getEditType() === 'economy') {
             return true;
         }
         return false;
