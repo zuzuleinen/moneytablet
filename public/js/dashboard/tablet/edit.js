@@ -83,6 +83,18 @@ Tablet.Expense.Edit = {
                         row.find('.prediction-value').text(predictionValue);
                         self.removeActionButtons(row);
                         $('#balance-value').text(response.balanceValue);
+                        
+                        if (predictionValue < 0) {
+                            row.addClass('danger');
+                        } else {
+                            row.removeClass('danger');
+                        }
+                        
+                        if (response.balanceValue < 0) {
+                            $('#balance-value').addClass('text-danger');
+                        } else {
+                            $('#balance-value').removeClass('text-danger');
+                        }
                     }
                 },
                         'json'
