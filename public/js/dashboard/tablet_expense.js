@@ -77,6 +77,14 @@ Tablet.Expense = {
                         .siblings('.prediction-value')
                         .text(newPredictionValue.toFixed(2));
 
+                if (newPredictionValue < 0) {
+                    $('.prediction-id-checkbox[value="' + predictionId + '"]')
+                            .parents('tr').addClass('danger');
+                } else {
+                    $('.prediction-id-checkbox[value="' + predictionId + '"]')
+                            .parents('tr').removeClass('danger');
+                }
+
                 var newTotalExpensesValue = parseFloat(initialTotalExpensesValue) + parseFloat(expenseValue);
                 self.totalExpensesTd.text(newTotalExpensesValue.toFixed(2));
 
