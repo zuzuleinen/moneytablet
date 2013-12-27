@@ -76,6 +76,12 @@ Tablet.Prediction = {
                 self.totalExpensesTd.text(newTotalExpensesValue.toFixed(2));
                 self.currentSumTd.text(newCurrentMoneyValue.toFixed(2));
                 self.balanceValueSpan.text(newBalanceValue.toFixed(2));
+
+                if (newBalanceValue < 0) {
+                    self.balanceValueSpan.addClass('text-danger');
+                } else {
+                    self.balanceValueSpan.removeClass('text-danger');
+                }
             }
         },
                 'json'
@@ -155,6 +161,11 @@ Tablet.Prediction = {
 
                 var newBalanceValue = parseFloat(initialBalanceValue) - parseFloat(predictionValue);
                 self.balanceValueSpan.text(newBalanceValue.toFixed(2));
+
+                if (newBalanceValue < 0) {
+                    self.balanceValueSpan.addClass('text-danger');
+                }
+
                 self.singlePredictionCheckbox = $('.prediction-id-checkbox');
             } else {
                 if (response.predictionMsg) {

@@ -54,7 +54,7 @@ Tablet.Expense = {
         var initialTotalExpensesValue = self.totalExpensesTd.text();
 
         var totalAmountValue = self.totalAmountTd.text();
-        
+
         var totalEconomiesValue = self.economiesTd.text();
 
         var initialBalanceValue = self.balanceValueSpan.text();
@@ -77,6 +77,14 @@ Tablet.Expense = {
                         .siblings('.prediction-value')
                         .text(newPredictionValue.toFixed(2));
 
+                if (newPredictionValue < 0) {
+                    $('.prediction-id-checkbox[value="' + predictionId + '"]')
+                            .parents('tr').addClass('danger');
+                } else {
+                    $('.prediction-id-checkbox[value="' + predictionId + '"]')
+                            .parents('tr').removeClass('danger');
+                }
+
                 var newTotalExpensesValue = parseFloat(initialTotalExpensesValue) + parseFloat(expenseValue);
                 self.totalExpensesTd.text(newTotalExpensesValue.toFixed(2));
 
@@ -85,16 +93,22 @@ Tablet.Expense = {
 
                 var predictions = $('.prediction-value');
                 var predictionsSum = 0;
-                
+
                 $.each(predictions, function(key, value) {
                     predictionVal = parseFloat($(value).text());
                     if (predictionVal > 0) {
                         predictionsSum = predictionsSum + predictionVal;
                     }
                 });
-                
+
                 var newBalanceValue = parseFloat(newCurrentSumValue) - parseFloat(predictionsSum);
                 self.balanceValueSpan.text(newBalanceValue.toFixed(2));
+
+                if (newBalanceValue < 0) {
+                    self.balanceValueSpan.addClass('text-danger');
+                } else {
+                    self.balanceValueSpan.removeClass('text-danger');
+                }
 
             } else {
                 if (response.predictionMsg) {
