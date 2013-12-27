@@ -57,6 +57,12 @@ Tablet.Income = {
                 var newBalanceValue = parseFloat(initialBalanceValue) + parseFloat(incomeValue);
                 self.balanceValueSpan.text(newBalanceValue.toFixed(2));
 
+                if (newBalanceValue < 0) {
+                    self.balanceValueSpan.addClass('text-danger');
+                } else {
+                    self.balanceValueSpan.removeClass('text-danger');
+                }
+
             } else {
                 if (response.incomeValueMsg) {
                     self.incomeValueInput.closest('.form-group').addClass('has-error');
