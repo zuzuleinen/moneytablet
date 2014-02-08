@@ -16,11 +16,12 @@ class DashboardController extends BaseController
         $userTablet = $this->_getCurrentTablet();
 
         if ($userTablet) {
-            $predictions = $userTablet->predictions()->orderBy('value', 'desc')->get();
+            $predictionsByValue = $userTablet->predictions()->orderBy('value', 'desc')->get();
+            $predictionsByName = $userTablet->predictions()->orderBy('name', 'asc')->get();
             
-            return View::make('dashboard/index', array('tablet' => $userTablet, 'predictions' => $predictions))
+            return View::make('dashboard/index', array('tablet' => $userTablet, 'predictions' => $predictionsByValue))
                 ->nest('predictionModal', 'dashboard.modal.prediction')
-                ->nest('expenseModal', 'dashboard.modal.expense', array('predictions' => $predictions))
+                ->nest('expenseModal', 'dashboard.modal.expense', array('predictions' => $predictionsByName))
                 ->nest('incomeModal', 'dashboard.modal.income')
                 ->nest('economyModal', 'dashboard.modal.economy')
                 ->nest('closeTabletModal', 'dashboard.modal.closetablet');
