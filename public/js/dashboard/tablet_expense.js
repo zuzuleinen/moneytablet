@@ -37,9 +37,10 @@ Tablet.Expense = {
     },
     saveExpense: function(event) {
         var self = event.data;
-
+        var saveButton = $(this);
         var predictionId = self.predictionIdInput.val();
         var expenseValue = self.expenseValueInput.val();
+        saveButton.attr('disabled', 'disabled');
 
         var initialExpenseValue = $('.prediction-id-checkbox[value="' + predictionId + '"]')
                 .parent()
@@ -111,6 +112,7 @@ Tablet.Expense = {
                 }
 
             } else {
+                saveButton.removeAttr('disabled');
                 if (response.predictionMsg) {
                     self.predictionIdInput.closest('.form-group').addClass('has-error');
                     self.predictionIdInput.parent().next('.help-block').text(response.predictionMsg);
@@ -133,6 +135,7 @@ Tablet.Expense = {
     },
     clearModal: function(event) {
         var self = event.data;
+        self.saveExpenseButton.removeAttr('disabled');
         self.predictionIdInput.prop('selectedIndex', 0);
         self.expenseValueInput.val('');
         self.predictionIdInput.parent().next('.help-block').text('');
