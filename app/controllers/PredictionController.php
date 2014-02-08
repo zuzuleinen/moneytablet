@@ -24,7 +24,7 @@ class PredictionController extends BaseController {
 
             $rules = array(
                 'prediction' => array('required', 'max:20'),
-                'value' => array('required', 'numeric')
+                'value' => array('required', 'numeric', 'min:0')
             );
 
             $messages = array(
@@ -33,6 +33,7 @@ class PredictionController extends BaseController {
                 'prediction.unique' => 'You arleady have a prediction with this name.',
                 'value.required' => 'Please enter prediction value.',
                 'value.numeric' => 'Prediction value must be a numeric value. Ex: 90, 3.42',
+                'value.min' => 'Value must be a positive number.'
             );
 
             $validator = Validator::make($postData, $rules, $messages);
