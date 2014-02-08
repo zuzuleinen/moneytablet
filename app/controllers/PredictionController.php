@@ -5,8 +5,7 @@
  * 
  * @author Andrei Boar <andrey.boar@gmail.com>
  */
-class PredictionController extends BaseController
-{
+class PredictionController extends BaseController {
 
     /**
      * Create prediction action
@@ -81,19 +80,23 @@ class PredictionController extends BaseController
 
             $prediction = Prediction::find($predictionId);
 
+            if (!$prediction) {
+                return Response::json($response);
+            }
+
             if ($predictionName) {
                 $prediction->name = $predictionName;
                 $prediction->save();
             }
 
-
-            $tabletId = $prediction->tablet_id;
-            $prediction->value = $predictionValue;
-            $prediction->save();
-            $tablet = Tablet::find($tabletId);
-            $balanceValue = $tablet->getBalance();
-            $response['balanceValue'] = $balanceValue;
-
+            if ($predictionValue) {
+                $tabletId = $prediction->tablet_id;
+                $prediction->value = $predictionValue;
+                $prediction->save();
+                $tablet = Tablet::find($tabletId);
+                $balanceValue = $tablet->getBalance();
+                $response['balanceValue'] = $balanceValue;
+            }
 
             $response['predictionId'] = $prediction->id;
             $response['success'] = true;
