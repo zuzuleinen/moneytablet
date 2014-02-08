@@ -34,9 +34,11 @@ Tablet.Economy = {
     },
     saveEconomy: function(event) {
         var self = event.data;
-
+        var saveButton = $(this);
         var tabletId = self.tabletIdInput.val();
         var economyValue = self.economyValueInput.val();
+        
+        saveButton.attr('disabled', 'disabled');
 
         var initialCurrentSumValue = self.currentSumTd.text();
         var initialEconomiesValue = self.economiesTd.text();
@@ -59,6 +61,7 @@ Tablet.Economy = {
                 self.balanceValueSpan.text(newBalanceValue.toFixed(2));
 
             } else {
+                saveButton.removeAttr('disabled');
                 if (response.economyValueMsg) {
                     self.economyValueInput.closest('.form-group').addClass('has-error');
                     self.economyValueInput.parent().next('.help-block').text(response.economyValueMsg);
@@ -81,6 +84,7 @@ Tablet.Economy = {
     },
     clearModal: function(event) {
         var self = event.data;
+        self.saveEconomyButton.removeAttr('disabled');
         self.economyValueInput.val('');
         self.economyValueInput.parent().next('.help-block').text('');
         self.economyValueInput.parents('.form-group').removeClass('has-error');

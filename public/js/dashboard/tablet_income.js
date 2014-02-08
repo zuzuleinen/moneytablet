@@ -34,9 +34,12 @@ Tablet.Income = {
     },
     saveIncome: function(event) {
         var self = event.data;
-
+        var saveButton = $(this);
+        
         var tabletId = self.tabletIdInput.val();
         var incomeValue = self.incomeValueInput.val();
+        
+        saveButton.attr('disabled', 'disabled');
 
         var initialTotalAmountValue = self.totalAmountTd.text();
         var initialCurrentSumValue = self.currentSumTd.text();
@@ -64,6 +67,7 @@ Tablet.Income = {
                 }
 
             } else {
+                saveButton.removeAttr('disabled');
                 if (response.incomeValueMsg) {
                     self.incomeValueInput.closest('.form-group').addClass('has-error');
                     self.incomeValueInput.parent().next('.help-block').text(response.incomeValueMsg);
@@ -87,6 +91,7 @@ Tablet.Income = {
     },
     clearModal: function(event) {
         var self = event.data;
+        self.saveIncomeButton.removeAttr('disabled');
         self.incomeValueInput.val('');
         self.incomeValueInput.parent().next('.help-block').text('');
         self.incomeValueInput.parents('.form-group').removeClass('has-error');

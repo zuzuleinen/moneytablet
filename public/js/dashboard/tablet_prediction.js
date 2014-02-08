@@ -129,6 +129,7 @@ Tablet.Prediction = {
         self.addPredictionModal.modal('show');
     },
     savePrediction: function(event) {
+        var saveButton = $(this);
         var self = event.data;
         var tabletId = self.tabletIdInput.val();
 
@@ -136,6 +137,8 @@ Tablet.Prediction = {
         var predictionValue = self.predictionValueInput.val();
 
         var initialBalanceValue = self.balanceValueSpan.text();
+
+        saveButton.attr('disabled', 'disabled');
 
         $.post(
                 '/prediction/create',
@@ -168,6 +171,7 @@ Tablet.Prediction = {
 
                 self.singlePredictionCheckbox = $('.prediction-id-checkbox');
             } else {
+                saveButton.removeAttr('disabled');
                 if (response.predictionMsg) {
                     self.predictionNameInput.closest('.form-group').addClass('has-error');
                     self.predictionNameInput.parent().next('.help-block').text(response.predictionMsg);
@@ -191,6 +195,7 @@ Tablet.Prediction = {
     clearModal: function(event) {
         var self = event.data;
 
+        self.savePredictionButton.removeAttr('disabled');
         self.predictionNameInput.val('');
         self.predictionValueInput.val('');
         self.predictionNameInput.closest('.form-group').removeClass('has-error');
