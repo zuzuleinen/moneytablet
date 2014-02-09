@@ -48,7 +48,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     {
         return $this->email;
     }
-    
+
     /**
      * Define one to many relationship with profiles
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -56,6 +56,30 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     public function profiles()
     {
         return $this->hasMany('Profile');
+    }
+
+    /**
+     * Define one to many relationship with tablets
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function tablets()
+    {
+        return $this->hasMany('Tablet');
+    }
+    
+    /**
+     * Get last inactive tablet for user
+     * 
+     * @param string $order
+     * @return Tablet
+     */
+    public function getLastInactiveTablet($order = 'desc')
+    {
+        return $this->tablets()
+                ->orderBy('created_at', $order)
+                ->where('is_active', 0)
+                ->firstOrFail();
     }
 
 }

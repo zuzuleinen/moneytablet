@@ -5,8 +5,7 @@
  *
  * @author Andrei Boar <andrei.boar@gmail.com>
  */
-class TabletController extends BaseController
-{
+class TabletController extends BaseController {
 
     /**
      * Tablet create action
@@ -15,9 +14,10 @@ class TabletController extends BaseController
     public function create()
     {
         $suggestedName = date('F Y');
+        $totalTablets = count($this->_getCurrentUser()->tablets);
 
         return View::make(
-                'tablet/create', array('tabletName' => $suggestedName)
+                'tablet/create', array('tabletName' => $suggestedName, 'totalTablets' => $totalTablets)
         );
     }
 
@@ -47,6 +47,8 @@ class TabletController extends BaseController
                     ->with('amount', $postData['amount']);
         }
 
+        $recurrentPredictions = isset($postData['recurrent_predictions']) ? true : false;
+
         $tablet = new Tablet();
         $tablet->user_id = Auth::user()->id;
         $tablet->name = $postData['name'];
@@ -56,7 +58,31 @@ class TabletController extends BaseController
         $tablet->is_active = 1;
         $tablet->save();
 
+        if ($recurrentPredictions) {
+            $this->_populateTabletWithPreviousData($tablet);
+        }
+
         return Redirect::to('dashboard');
+    }
+
+    protected function _populateTabletWithPreviousData($newTablet)
+    {
+        $lastInactiveTablet = $this->_getCurrentUser()->getLastInactiveTablet();
+
+        $oldPredictions = $lastInactiveTablet->predictions;
+
+        if (count($oldPredictions)) {
+            foreach ($oldPredictions as $oldPrediction) {
+                $prediction = new Prediction();
+                $prediction->tablet_id = $newTablet->id;
+                $prediction->name = $oldPrediction->name;
+                $startingSum = ($oldPrediction->getTotalExpenses()) ? $oldPrediction->getTotalExpenses() : $oldPrediction->predicted;
+
+                $prediction->predicted = $startingSum;
+                $prediction->value = $startingSum;
+                $prediction->save();
+            }
+        }
     }
 
     /**
@@ -95,4 +121,5 @@ class TabletController extends BaseController
 
         return Redirect::to('dashboard');
     }
+
 }
