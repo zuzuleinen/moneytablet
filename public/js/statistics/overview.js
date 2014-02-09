@@ -17,7 +17,8 @@ function doStats() {
         drawIncomeChart: function(data) {
             var options = {
                 title: 'Income Performance',
-                colors: ['green']
+                colors: ['green'],
+                vAxis: {minValue: 0}
             };
             var id = 'chart_income';
 
@@ -26,7 +27,8 @@ function doStats() {
         drawExpensesChart: function(data) {
             var options = {
                 title: 'Expense Performance',
-                colors: ['red']
+                colors: ['red'],
+                vAxis: {minValue: 0}
             };
             var id = 'chart_expenses';
 
@@ -37,7 +39,7 @@ function doStats() {
             var options = {
                 title: 'Savings Performance',
                 colors: ['orange'],
-                vAxis: {minValue : 0}
+                vAxis: {minValue: 0}
             };
 
             var id = 'chart_economies';
@@ -47,8 +49,8 @@ function doStats() {
         },
         drawLineChart: function(data, options, id) {
             var chartData = google.visualization.arrayToDataTable(data);
-            
-          
+
+
 
             var chart = new google.visualization.LineChart(document.getElementById(id));
             chart.draw(chartData, options);
