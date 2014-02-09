@@ -29,6 +29,9 @@ class StatisticsController extends BaseController {
         $tablets = $this->_getCurrentUser()->tablets;
 
         foreach ($tablets as $tablet) {
+            if ($tablet->is_active === 1) {
+                continue;
+            } 
             $response['incomes'][] = array($tablet->name, (int) $tablet->total_amount);
             $response['expenses'][] = array($tablet->name, (int) $tablet->total_expenses);
             $response['savings'][] = array($tablet->name, (int) $tablet->economies);
