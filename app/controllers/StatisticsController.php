@@ -12,9 +12,9 @@ class StatisticsController extends BaseController {
      */
     public function overview()
     {
-        $tablets = $this->_getCurrentUser()->tablets;
+        $tablets = $this->_getCurrentUser()->tablets()->where('is_active', '=', 0);
         
-        $viewData['allowToViewStatistics'] = (count($tablets) > 2) ? true : false;
+        $viewData['allowToViewStatistics'] = (count($tablets) > 1) ? true : false;
         
         return View::make('statistics/overview', $viewData);
     }
