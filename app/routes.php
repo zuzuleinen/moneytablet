@@ -100,3 +100,6 @@ Route::post('password/postRemind', array('before' => 'guest', 'uses' => 'Reminde
 Route::get('password/getReset/{token}', array('as' => 'reset-password','before' => 'guest', 'uses' => 'RemindersController@getReset'));
 Route::post('password/postReset', array('before' => 'guest', 'uses' => 'RemindersController@postReset'));
 Route::get('reset/success', array('as' => 'reset-password-success','before' => 'guest', 'uses' => 'AccountController@resetSuccess'));
+
+Route::get('statistics/overview', array('before' => 'auth', 'uses' => 'StatisticsController@overview'));
+Route::get('statistics/get-statistics', array('before' => 'auth', 'uses' => 'StatisticsController@getStatistics'));
