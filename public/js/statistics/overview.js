@@ -36,7 +36,8 @@ function doStats() {
         drawEconomiesChart: function(data) {
             var options = {
                 title: 'Savings Performance',
-                colors: ['orange']
+                colors: ['orange'],
+                vAxis: {minValue : 0}
             };
 
             var id = 'chart_economies';
@@ -46,6 +47,8 @@ function doStats() {
         },
         drawLineChart: function(data, options, id) {
             var chartData = google.visualization.arrayToDataTable(data);
+            
+          
 
             var chart = new google.visualization.LineChart(document.getElementById(id));
             chart.draw(chartData, options);
