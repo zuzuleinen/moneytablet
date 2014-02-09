@@ -23,6 +23,15 @@
         </div>
         <span class="help-block"><?php echo $errors->first('economies'); ?></span>
     </div>
+    @if ($totalTablets > 0) 
+    <div class="form-group">
+        <div class="col-lg-3 col-lg-offset-2">
+            <label for="recurrent_predictions">
+                <input id="recurrent_predictions" name="recurrent_predictions" type="checkbox" value="1"> Add predictions from previous tablet.
+            </label>
+        </div>
+    </div>
+    @endif
     <div class="form-group">
         <div class="col-lg-offset-2 col-lg-3">
             <button type="submit" class="btn btn-lg btn-block btn-danger btn-primary">Create your tablet</button>

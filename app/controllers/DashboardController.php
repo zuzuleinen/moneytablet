@@ -41,14 +41,4 @@ class DashboardController extends BaseController
 
         return $tablet->loadByUserId($userId);
     }
-
-    /**
-     * Get current user
-     * @return User
-     */
-    protected function _getCurrentUser()
-    {
-        return Auth::user();
-    }
-
 }
