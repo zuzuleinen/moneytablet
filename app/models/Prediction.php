@@ -44,7 +44,8 @@ class Prediction extends Eloquent
      */
     public function getBySuggestedTerm($term, $userId = null)
     {
-        return $this->where('name', 'like', '%' . $term . '%')
+        return $this->select('name')
+            ->where('name', 'like', '%' . $term . '%')
             ->distinct()
             ->get();
     }
