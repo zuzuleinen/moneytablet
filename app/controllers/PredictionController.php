@@ -90,7 +90,7 @@ class PredictionController extends BaseController {
                 $prediction->save();
             }
 
-            if ($predictionValue) {
+            if (!is_null($predictionValue)) {
                 $tabletId = $prediction->tablet_id;
                 $prediction->value = $predictionValue;
                 $prediction->save();
