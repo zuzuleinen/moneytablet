@@ -9,8 +9,9 @@
         <title>MoneyTablet.com - Hack your personal finances</title>
 
         {{ HTML::style('css/bootstrap.css') }}
-        {{ HTML::style('css/custom.css') }}
         {{ HTML::style('css/auth-buttons.css') }}
+        {{ HTML::style('css/jquery-ui.min.css') }}
+        {{ HTML::style('css/custom.css') }}
     </head>
     @show
     <body style="padding-top: 50px; padding-bottom: 20px;">
@@ -34,10 +35,11 @@
                     </ul>
                     @section('login')
                     <?php if (!Auth::check()): ?>
-                    <?php $route = Route::currentRouteName();
-                    $nowAllowedPaths = array('remind-password', 'reset-password', 'registration', 'reset-password-success');
-                    ?>
-                        <?php if (!in_array($route, $nowAllowedPaths)): ?>
+                        <?php
+                        $route = Route::currentRouteName();
+                        $nowAllowedPaths = array('remind-password', 'reset-password', 'registration', 'reset-password-success');
+                        ?>
+    <?php if (!in_array($route, $nowAllowedPaths)): ?>
                             <form action="{{ URL::to('account/loginPost') }}" class="navbar-form navbar-right" method="POST">
                                 <div class="form-group">
                                     <input name="email" type="text" placeholder="Email" class="form-control">
@@ -61,11 +63,11 @@
                                 </div>
                             </form>
                         <?php endif; ?>
-                    <?php else: ?>
+<?php else: ?>
                         <ul class="nav navbar-nav navbar-right">
                             <li><a href="{{ URL::to('account/logOut')}}">Log Out</a></li>
                         </ul>
-                    <?php endif; ?>
+<?php endif; ?>
                     @show
                 </div>
             </div>
@@ -83,6 +85,7 @@
         @section('footer-js-scripts')
         {{ HTML::script('js/jquery-2.0.3.min.js') }}
         {{ HTML::script('js/bootstrap.min.js') }}
+        {{ HTML::script('js/jquery-ui.min.js') }}
         @show
     </body>
 </html>

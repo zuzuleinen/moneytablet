@@ -33,4 +33,17 @@ class Prediction extends Eloquent
     {
         return $this->expenses()->sum('value');
     }
+    
+    /**
+     * Get predictions by term
+     * Here we should add a filter based on user id
+     * 
+     * @param string $term
+     * @param int $userId
+     * @return array
+     */
+    public function getBySuggestedTerm($term, $userId = null)
+    {
+        return $this->where('name', 'like', '%' . $term . '%')->get();
+    }
 }

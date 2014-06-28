@@ -25,6 +25,8 @@ Route::get('tablet/closeSuccess', array('before' => 'auth', 'uses' => 'TabletCon
 Route::post('prediction/create', array('before' => 'auth', 'uses' => 'PredictionController@create'));
 Route::post('prediction/edit', array('before' => 'auth', 'uses' => 'PredictionController@edit'));
 Route::post('prediction/delete', array('before' => 'auth', 'uses' => 'PredictionController@delete'));
+Route::get('prediction/automcomplete', array('before' => 'auth', 'uses' => 'PredictionController@autocomplete'));
+
 
 Route::post('expense/create', array('before' => 'auth', 'uses' => 'ExpenseController@create'));
 
