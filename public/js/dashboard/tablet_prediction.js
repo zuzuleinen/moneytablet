@@ -25,6 +25,7 @@ Tablet.Prediction = {
         this.selectAllPredictionsCheckbox = $('#prediction-all-checkbox');
         this.singlePredictionCheckbox = $('.prediction-id-checkbox');
 
+        this.initAutocomplete();
         this.bindEvents();
     },
     bindEvents: function() {
@@ -36,6 +37,12 @@ Tablet.Prediction = {
         this.selectAllPredictionsCheckbox.on('change', this, this.toogleSelectAllPredictions);
         this.singlePredictionCheckbox.on('change', this, this.afterSinglePredictionClick);
         this.deletePredictionsButton.on('click', this, this.deletePredictions);
+    },
+    initAutocomplete: function() {
+        this.predictionNameInput.autocomplete({
+            minLength: 3,
+            source: '/prediction/automcomplete'
+        });
     },
     deletePredictions: function(event) {
         var self = event.data;

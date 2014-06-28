@@ -10,7 +10,7 @@
                     <div class="form-group ">
                         <label class="col-lg-2 control-label" for="name">Name</label>
                         <div class="col-lg-5">
-                            <input type="text" value="" class="form-control" name="name" autocomplete="off">
+                            <input id="prediction-name" type="text" value="" class="form-control" name="name" autocomplete="off">
                         </div>
                         <p class="help-block"></p>
                     </div>

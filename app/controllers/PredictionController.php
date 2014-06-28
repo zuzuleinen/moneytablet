@@ -5,7 +5,8 @@
  * 
  * @author Andrei Boar <andrey.boar@gmail.com>
  */
-class PredictionController extends BaseController {
+class PredictionController extends BaseController
+{
 
     /**
      * Create prediction action
@@ -141,6 +142,27 @@ class PredictionController extends BaseController {
 
         return Response::json($response);
     }
+    
+    /**
+     * Action for ajax autocomplete by name
+     * 
+     * @return json
+     */
+    public function autocomplete()
+    {
+        $term = Input::get('term');
+        
+        $prediction = new Prediction();
+        $suggestions = $prediction->getBySuggestedTerm($term);
+        
+        $response = array();
+        
+        foreach ($suggestions as $suggestion) {
+            $response[] = $suggestion->name;
+        }
+
+        return Response::json($response);
+    }
 
     /**
      * Get array of prediction ids from request string
@@ -154,5 +176,4 @@ class PredictionController extends BaseController {
 
         return $predictionIdsArr;
     }
-
 }
