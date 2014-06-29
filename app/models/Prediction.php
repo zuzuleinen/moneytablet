@@ -63,7 +63,9 @@ FROM `predictions`
 INNER JOIN (SELECT prediction_id, sum(value) as expenseValue from expenses GROUP BY prediction_id) ex
 ON `predictions`.id = ex.prediction_id
 WHERE `predictions` .tablet_id in (select id from tablets where user_id = $userId)
-group by name;");
+group by name
+ORDER BY value DESC
+;");
     }
 }
 
