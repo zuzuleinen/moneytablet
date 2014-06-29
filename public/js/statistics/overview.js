@@ -13,6 +13,22 @@ function doStats() {
                     },
                     'json'
                     );
+
+            $.get('/expense/get-all',
+                    function(data) {
+                        self.drawAllExpensesChart(data);
+                    },
+                    'json'
+                    );
+        },
+        drawAllExpensesChart: function(data) {
+            var id = 'chart_all_expenses';
+
+            var options = {
+                title: 'All expenses',
+                vAxis: {minValue: 0}
+            };
+            this.drawBarChart(data, options, id);
         },
         drawIncomeChart: function(data) {
             var options = {
@@ -53,6 +69,12 @@ function doStats() {
 
 
             var chart = new google.visualization.LineChart(document.getElementById(id));
+            chart.draw(chartData, options);
+        },
+        drawBarChart: function(data, options, id) {
+            var chartData = google.visualization.arrayToDataTable(data);
+
+            var chart = new google.visualization.BarChart(document.getElementById(id));
             chart.draw(chartData, options);
         }
     };

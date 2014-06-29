@@ -1,6 +1,7 @@
 <?php
 
-class ExpenseController extends BaseController {
+class ExpenseController extends BaseController
+{
 
     public function create()
     {
@@ -48,5 +49,25 @@ class ExpenseController extends BaseController {
 
         return Response::json($response);
     }
+    
+    /**
+     * Get all expenses so far
+     * in json format
+     * 
+     * @return json
+     */
+    public function getAllExpensesJson()
+    {
+        $response = array(
+            array('Expense', 'Total expense'),
+        );
+        $prediction = new Prediction();
+        $expenses = $prediction->getAllSpentPredictions(Auth::user()->id);
+        
+        foreach ($expenses as $expense) {
+            $response[] = array($expense->name, (float) $expense->value);
+        }
 
+        return Response::json($response);
+    }
 }
