@@ -9,7 +9,7 @@
         <div id="chart_income" style="height: 400px;"></div>
         <div id="chart_expenses" style="height: 400px;"></div>
         <div id="chart_economies" style="height: 400px;"></div>
-        <div id="chart_all_expenses" style="height: 400px;"></div>
+        <div id="chart_all_expenses" style="height: auto;"></div>
     </div>
 </div>
 
