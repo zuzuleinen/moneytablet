@@ -26,7 +26,10 @@ class DashboardController extends BaseController
                 ->nest('economyModal', 'dashboard.modal.economy')
                 ->nest('closeTabletModal', 'dashboard.modal.closetablet');
         }
-        return View::make('dashboard/info');
+        
+        $tabletsSoFar = count($this->_getCurrentUser()->tablets()->getResults());
+        
+        return View::make('dashboard/info', array('tabletsSoFar' => $tabletsSoFar));
     }
 
     /**

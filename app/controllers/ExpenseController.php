@@ -49,7 +49,7 @@ class ExpenseController extends BaseController
 
         return Response::json($response);
     }
-    
+
     /**
      * Get all expenses so far
      * in json format
@@ -63,10 +63,15 @@ class ExpenseController extends BaseController
         );
         $prediction = new Prediction();
         $expenses = $prediction->getAllSpentPredictions(Auth::user()->id);
-        
-        foreach ($expenses as $expense) {
-            $response[] = array($expense->name, (float) $expense->value);
+
+        if (count($expenses)) {
+            foreach ($expenses as $expense) {
+                $response[] = array($expense->name, (float) $expense->value);
+            }
+        } else {
+            $response[] = array('Nothing', 0);
         }
+
 
         return Response::json($response);
     }
