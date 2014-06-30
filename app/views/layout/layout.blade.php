@@ -29,7 +29,7 @@
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li><a href="{{ URL::to('how-to') }}">How does it work</a></li>
-                        @if (Auth::check() &&  ($tabletsSoFar != 0) )
+                        @if (Auth::check())
                         <li><a href="{{ URL::to('statistics/overview') }}">Statistics</a></li>
                         @endif
                     </ul>

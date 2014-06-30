@@ -9,9 +9,8 @@ class BaseController extends Controller {
      */
     protected function setupLayout()
     {
-        $tabletsSoFar = count($this->_getCurrentUser()->tablets()->getResults());
         if (!is_null($this->layout)) {
-            $this->layout = View::make($this->layout, array('tabletsSoFar' => $tabletsSoFar));
+            $this->layout = View::make($this->layout);
         }
     }
 
