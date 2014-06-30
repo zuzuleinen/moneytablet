@@ -3,7 +3,8 @@
 /**
  * Statistics controller
  */
-class StatisticsController extends BaseController {
+class StatisticsController extends BaseController
+{
 
     /**
      * Show statistics overview
@@ -28,13 +29,18 @@ class StatisticsController extends BaseController {
 
         $tablets = $this->_getCurrentUser()->tablets;
 
-        foreach ($tablets as $tablet) {
-            $response['incomes'][] = array($tablet->name, (int) $tablet->total_amount);
-            $response['expenses'][] = array($tablet->name, (int) $tablet->total_expenses);
-            $response['savings'][] = array($tablet->name, (int) $tablet->economies);
+        if (count($tablets)) {
+            foreach ($tablets as $tablet) {
+                $response['incomes'][] = array($tablet->name, (int) $tablet->total_amount);
+                $response['expenses'][] = array($tablet->name, (int) $tablet->total_expenses);
+                $response['savings'][] = array($tablet->name, (int) $tablet->economies);
+            }
+        } else {
+            $response['incomes'][] = array('', 0);
+            $response['expenses'][] = array('', 0);
+            $response['savings'][] = array('', 0);
         }
 
         return Response::json($response);
     }
-
 }
