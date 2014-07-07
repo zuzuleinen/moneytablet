@@ -21,6 +21,9 @@
             current income and savings if any. A tablet is currency agnostic, 
             you can have only one active and you can close it any time.
         </p>
+        <p>If you get your salary on the 1'st of month, then you can create a tablet
+            starting with 1'st of month and close it at the end of the month.
+        </p>
     </div>
     <div class="col-md-4" style="margin-top: 30px;">        
         <img class="thumbnail" src="/img/create-tablet.png" alt="create-tablet" />
@@ -35,6 +38,10 @@
             decrease. Balance is how much money you will have after spending 
             all those predictions.
         </p>
+        <p>Try not to add predictions so your Balance go bellow zero. Always 
+            leave your Balance positive. Otherwise by the end of the month you will
+            be in debts and some trouble.
+        </p>
     </div>
     <div class="col-md-4" style="margin-top: 30px;">        
         <img class="thumbnail" src="/img/create-prediction.png" alt="create-prediction" />
@@ -47,6 +54,9 @@
             see that your current money will decrease with each spending 
             and also each prediction budget.
         </p>
+        <p>Be careful not to spend more than you predicted. Going beyond your budget
+            will only make you lose money.
+        </p>
     </div>
     <div class="col-md-4" style="margin-top: 30px;">        
         <img class="thumbnail" src="/img/add-expense.png" alt="add-expense" />
@@ -55,8 +65,8 @@
 <div class="row">
     <div class="col-md-11">
         <h3>The main goal</h3>
-        <p>The main goal of this application is to know how much money 
-            you have at any given time and how much money you can spend 
+        <p>The main goal of this application is to know <strong>how much money 
+                you have</strong> at any given time and <strong>how much money you can spend</strong> 
             without going bellow your means. Watch your <strong>Balance</strong> value and 
             don't let it drop bellow zero. Happy spendings!
         </p>
