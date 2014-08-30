@@ -28,7 +28,13 @@ Tablet.Expense.Edit = {
             self.setType(td);
             self.prevSelectedValue = td.text();
             var row = td.parent();
-            td.html('<input class="form-control edit-value" type="text" value="' + self.prevSelectedValue + '">');
+            var type = 'number';
+
+            if (td.attr('class') === 'prediction-name') {
+                type = 'text';
+            }
+
+            td.html('<input class="form-control edit-value" type="' + type + '" value="' + self.prevSelectedValue + '">');
             self.showActionButtons(row);
         }
         self.flagCell = true;
@@ -83,13 +89,13 @@ Tablet.Expense.Edit = {
                         row.find('.prediction-value').text(predictionValue);
                         self.removeActionButtons(row);
                         $('#balance-value').text(response.balanceValue);
-                        
+
                         if (predictionValue < 0) {
                             row.addClass('danger');
                         } else {
                             row.removeClass('danger');
                         }
-                        
+
                         if (response.balanceValue < 0) {
                             $('#balance-value').addClass('text-danger');
                         } else {

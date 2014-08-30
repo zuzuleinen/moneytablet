@@ -10,7 +10,7 @@
                     <div class="form-group ">
                         <label class="col-lg-2 control-label" for="economy_value">Value</label>
                         <div class="col-lg-5">
-                            <input type="text" value="" class="form-control" name="economy_value" autocomplete="off">
+                            <input type="number" value="" class="form-control" name="economy_value" autocomplete="off">
                         </div>
                         <span class="help-block"></span>
                     </div>

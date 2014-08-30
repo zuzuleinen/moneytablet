@@ -12,14 +12,14 @@
     <div class="form-group <?php echo ($errors->has('amount')) ? 'has-error' : '' ?>">
         <label for="amount" class="col-lg-2 control-label">Start income</label>
         <div class="col-lg-3">
-            <input autocomplete="off" name="amount" id="amount" type="text" class="form-control" value="<?php echo Session::get('amount') ?>" >
+            <input autocomplete="off" name="amount" id="amount" type="number" class="form-control" value="<?php echo Session::get('amount') ?>" >
         </div>
         <span class="help-block"><?php echo $errors->first('amount'); ?></span>
     </div>
     <div class="form-group <?php echo ($errors->has('economies')) ? 'has-error' : '' ?>">
         <label for="economies" class="col-lg-2 control-label">Savings</label>
         <div class="col-lg-3">
-            <input autocomplete="off" name="economies" id="economies" type="text" class="form-control" value="<?php echo Session::get('economies') ?>" >
+            <input autocomplete="off" name="economies" id="economies" type="number" class="form-control" value="<?php echo Session::get('economies') ?>" >
         </div>
         <span class="help-block"><?php echo $errors->first('economies'); ?></span>
     </div>
