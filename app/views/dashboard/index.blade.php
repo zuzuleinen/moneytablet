@@ -53,6 +53,24 @@
                 <tr></tr>
             </tbody>
         </table>
+        @if (count($lastExpenses))
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Last expense</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($lastExpenses as $lastExpense)
+                <tr>
+                    <td>{{ $lastExpense->name }}</td>
+                    <td>{{ $lastExpense->created_at }}</td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+        @endif
         <div class="breadcrumb">
             <strong>Balance: </strong><span id="balance-value" @if ($tablet->getBalance() < 0) class="text-danger" @endif>{{ $tablet->getBalance() }}</span>
         </div>
