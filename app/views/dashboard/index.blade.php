@@ -57,7 +57,8 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>Last expense</th>
+                    <th>Last expenses</th>
+                    <th>Value</th>
                     <th>Date</th>
                 </tr>
             </thead>
@@ -65,6 +66,7 @@
                 @foreach ($lastExpenses as $lastExpense)
                 <tr>
                     <td>{{ $lastExpense->name }}</td>
+                    <td>{{ $lastExpense->value }}</td>
                     <td>{{ $lastExpense->created_at }}</td>
                 </tr>
                 @endforeach
