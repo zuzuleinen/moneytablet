@@ -54,10 +54,10 @@ return array(
 
 		'mysql' => array(
 			'driver'    => 'mysql',
-			'host'      => 'localhost',
+			'host'      => 'moneytablet.mysql.eu1.frbit.com',
 			'database'  => 'moneytablet',
-			'username'  => 'root',
-			'password'  => 'root',
+			'username'  => 'moneytablet',
+			'password'  => 'DoqWbz6NOvmgRp9s',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
