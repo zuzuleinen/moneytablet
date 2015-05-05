@@ -19,7 +19,7 @@ class DashboardController extends BaseController
             $predictionsByValue = $userTablet->predictions()->orderBy('value', 'desc')->get();
             $predictionsByName = $userTablet->predictions()->orderBy('name', 'asc')->get();
             $expense = new Expense();
-            $lastExpenses = $expense->getLastExpenses($userTablet->id, 3);
+            $lastExpenses = $expense->getLastExpenses($userTablet->id, 5);
             
             return View::make('dashboard/index', array('tablet' => $userTablet, 'predictions' => $predictionsByValue, 'lastExpenses' => $lastExpenses))
                 ->nest('predictionModal', 'dashboard.modal.prediction')
