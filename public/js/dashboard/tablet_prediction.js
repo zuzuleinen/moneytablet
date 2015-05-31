@@ -73,7 +73,7 @@ Tablet.Prediction = {
                 {predictionIds: predictionIds},
         function(response) {
             if (response.success) {
-                checkedPredictions.parents('tr').hide(500);
+                checkedPredictions.parents('tr').remove();
 
                 //update new totals values
                 var newTotalExpensesValue = parseFloat(initialTotalExpenses) - checkedExpensesSum;
