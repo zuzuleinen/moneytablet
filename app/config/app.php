@@ -13,7 +13,7 @@ return array(
 	|
 	*/
 
-	'debug' => true,
+	'debug' => false,
 
 	/*
 	|--------------------------------------------------------------------------
@@ -65,7 +65,7 @@ return array(
 	|
 	*/
 
-	'key' => 'GMXJwg3jVSwBSKSMwdAVkq28WeZqaife',
+	'key' => 'ytKijxWwRvXgdjgHr13tjDTm6P1QH6Jn',
 
 	/*
 	|--------------------------------------------------------------------------

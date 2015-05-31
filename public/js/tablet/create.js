@@ -5,7 +5,6 @@
 jQuery('#name').change(removeErrorMsg);
 jQuery('#amount').change(removeErrorMsg);
 jQuery('#economies').change(removeErrorMsg);
-
 function removeErrorMsg() {
     var element = jQuery(this);
     element.parent().next('.help-block').text('');
