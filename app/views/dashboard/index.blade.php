@@ -54,7 +54,7 @@
             </tbody>
         </table>
         @if (count($lastExpenses))
-        <table class="table">
+        <table class="table" style="margin-bottom: 0px;">
             <thead>
                 <tr>
                     <th>Last expenses</th>
@@ -72,6 +72,11 @@
                 @endforeach
             </tbody>
         </table>
+        <div style="margin-bottom: 5px;" class="row">
+            <div class="col-md-2 col-md-offset-10">
+                <a href="{{URL::to('expense/all')}}">see all</a>
+            </div>
+        </div>
         @endif
         <div class="breadcrumb">
             <strong>Balance: </strong><span id="balance-value" @if ($tablet->getBalance() < 0) class="text-danger" @endif>{{ $tablet->getBalance() }}</span>

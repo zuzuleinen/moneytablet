@@ -30,7 +30,7 @@ Route::get('prediction/automcomplete', array('before' => 'auth', 'uses' => 'Pred
 
 Route::post('expense/create', array('before' => 'auth', 'uses' => 'ExpenseController@create'));
 Route::get('expense/get-all', array('before' => 'auth', 'uses' => 'ExpenseController@getAllExpensesJson'));
-
+Route::get('expense/all', array('before' => 'auth', 'uses' => 'ExpenseController@all'));
 
 Route::post('income/create', array('before' => 'auth', 'uses' => 'IncomeController@create'));
 

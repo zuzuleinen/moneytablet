@@ -49,6 +49,39 @@ class ExpenseController extends BaseController
 
         return Response::json($response);
     }
+    
+    /**
+     * Display all expenses from current tablet
+     * for current user
+     * 
+     * @return View
+     */
+    public function all()
+    {
+        $userTablet = $this->_getCurrentTablet();
+        
+        $expense = new Expense();
+        $expenses = $expense->getLastExpenses($userTablet->id);
+        
+        return View::make('expense/all', array(
+            'expenses' => $expenses, 
+            'tablet' => $userTablet
+            )
+        );
+    }
+    
+    /**
+     * Get current tablet
+     * @return Tablet
+     */
+    protected function _getCurrentTablet()
+    {
+        $userId = $this->_getCurrentUser()->id;
+
+        $tablet = new Tablet();
+
+        return $tablet->loadByUserId($userId);
+    }
 
     /**
      * Get all expenses so far
