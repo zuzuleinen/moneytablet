@@ -1,10 +1,4 @@
-/nbproject/private//nbproject/project.properties
-/nbproject/project.xml
-/nbproject/private/private.properties
-/nbproject/project.properties
-/nbproject/private/config.properties
-/nbproject/private/private.xml
-/vendor/
-/nbproject/private/
+vendor/
 composer.phar
 app/config/facebok.php
+.idea
