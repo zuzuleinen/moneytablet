@@ -10,7 +10,7 @@ Mail me at andrey.boar[at]gmail.com
 
 Step 1. Get your repository on your local machine
 
-Stept 2. Create a virtualhost with the document root pointing to /public
+Step 2. Create a virtualhost with the document root pointing to /public
 
 Step 3. Install composer
 
@@ -21,6 +21,8 @@ Step 5. Add permissions to app storage: 'chmod 777 -R app/storage/'
 Step 6. Go to app/config/database.php and add your db credentials
 
 Step 7. Run 'php artisan migrate' on project root for db migration
+
+Step 8. Apache mod_rewrite must be enabled
 
 ## Other info
 
